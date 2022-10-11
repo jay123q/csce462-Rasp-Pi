@@ -3,7 +3,7 @@
 pip install soundfile
 
 all you need to install! Make sure to change directories in the main. 
-I am going to send the wav file over email, place it in whatever directory you want :)
+I am going to send the wav file inside the folder in the Github, place it in whatever directory you want :)
 
 
 REFERENCES
