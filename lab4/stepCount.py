@@ -39,12 +39,8 @@ def dataCollection():
             magnitudePoint = abs(sqrt(xData*xData + yData*yData + zData*zData) - Gravity)
             magList.append(magnitudePoint)
             timeList.append(t.time() - timeStart)
-        xTemp,yTemp,zTemp, magTemp, timeTemp = graph(xAcceleration,yAcceleration,zAcceleration,magList,timeList)
-        xMaster.append(xTemp)
-        yMaster.append(yTemp)
-        zMaster.append(zTemp)
-        magMaster.append(magTemp)
-        timeMaster.append(timeTemp)
+        #xTemp,yTemp,zTemp, magTemp, timeTemp = graph(xAcceleration,yAcceleration,zAcceleration,magList,timeList)
+
         print((max(magList)), " The max magnitude detected is ")
         return (max(magList)) > 2
         # xAcceleration.append(mpu.acceleration[0])
@@ -74,12 +70,8 @@ def main():
     magnitudePoint = 0
     step = 0
     counter = 0
-    global xMaster
-    global yMaster
-    global zMaster
-    global timeMaster
-    global magMaster
-    xMaster,yMaster,zMaster,magMaster,timeMaster = []
+
+
     # Write a loop to poll each sensor and print its axis values 
     while True : 
         # print("Acceleration: X:%.2f, Y: %.2f, Z: %.2f m/s^2" % 
@@ -89,7 +81,7 @@ def main():
         if(dataCollection()):
             step +=1
         print("steps ", step)
-        t.sleep(.25) 
+        t.sleep(1) 
         counter +=1
     #print(magList)
         #graph(xAcceleration,yAcceleration,zAcceleration,magList,timeList)
@@ -118,17 +110,7 @@ if ( __name__ == "__main__"):
         # here you put any code you want to run before the program
         # exits when you press CTRL+C
         print ("\n", counter) # print value of counter
-        fig = plt.figure()
-        ax1 = fig.add_subplot(1,1,1)
-        ax1.clear()
-        ax1.plot(timeMaster, xMaster, label="x_acceleration Master")
-        ax1.plot(timeMaster, yMaster, label="y_acceleration Master")
-        ax1.plot(timeMaster, zMaster, label="z_acceleration Master")
-        ax1.plot(timeMaster, magMaster, label = "magnitude Master")
-        plt.legend()
-        fig.canvas.draw()
-        fig.canvas.flush_events()
-        plt.show()
+
 
    # except:
         # this catches ALL other exceptions including errors.
