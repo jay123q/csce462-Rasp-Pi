@@ -71,6 +71,10 @@ def writeNewSongs(filePathtoParsedSongs, parsedSong):
         
     LibsndfileError: Error opening <_io.BytesIO object at 0x7fdbb866e270>: Format not recognised.
     
+    This is probably because it does not have the header that wav files are supposed to have. 
+    https://docs.fileformat.com/audio/wav/ has information on what belongs in the first 44 bytes 
+    of the wav file, we need to add these to the beginning of the byte array in order for this 
+    byte array to be considered a "WAV" file.
         '''
     
     for i in parsedSong:
@@ -87,10 +91,6 @@ def writeNewSongs(filePathtoParsedSongs, parsedSong):
     said wave file into that wave path, its a similar implementation to my original
     parseSongs however it is much smarter to do that compartmentalized here :)'''
     
-
-
-
-
 
 def parseSong(songPath, parseFileName):
     
