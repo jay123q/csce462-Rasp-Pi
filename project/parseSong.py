@@ -14,8 +14,8 @@ songPath = '/Users/rohanlingala/Downloads/proj462/wav/' + userInput + ".wav"
 filePathtoParsedSongs = '/Users/rohanlingala/Downloads/proj462/p_wav/' 
 
 JOSH PATH VARIABLES: /* TODO */
-    songPath = 'C:/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/songs/' + userInput + ".wav"
-    filePathtoParsedSongs = 'C:/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/parsedSong/'
+    songPath = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/songs/' + userInput + '.wav'
+    filePathtoParsedSongs = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/parsedSong/'
 --------------------------------------------------------------------------------------------------------------------------
 '''
 from playsound import playsound #pip install playsound==1.2.2
@@ -232,9 +232,9 @@ def main():
     global fr 
     fr = 0
 
-    userInput = "snare"
-    songPath = 'C:/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/songs/' + userInput + ".wav"
-    filePathtoParsedSongs = 'C:/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/parsedSong/'
+    userInput = 'snare'
+    songPath = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/songs/' + userInput + '.wav'
+    filePathtoParsedSongs = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/parsedSong/'
     parsedFN = "16bitsnare"
     
     organizedDict, nchan, swidth, fr,parsedHeader = parseSong(songPath, parsedFN)
