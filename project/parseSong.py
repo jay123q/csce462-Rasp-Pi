@@ -14,6 +14,8 @@ songPath = '/Users/rohanlingala/Downloads/proj462/wav/' + userInput + ".wav"
 filePathtoParsedSongs = '/Users/rohanlingala/Downloads/proj462/p_wav/' 
 
 JOSH PATH VARIABLES: /* TODO */
+    songPath = 'C:/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/songs/' + userInput + ".wav"
+    filePathtoParsedSongs = 'C:/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/parsedSong/'
 --------------------------------------------------------------------------------------------------------------------------
 '''
 from playsound import playsound #pip install playsound==1.2.2
@@ -95,7 +97,7 @@ def writeNewSongs(filePathtoParsedSongs, parsedSong, nchan, swidth, fr, header):
     #print(header)
     #soundfile.SoundFile(file, mode='r', samplerate=None, channels=None, subtype=None, endian=None, format=None, closefd=True)[source]
     #headerAddPart = header + parsedSong[0]
-    headerAddPart = np.insert(header,parsedSong[0],0)
+    headerAddPart = np.add(header,parsedSong[0])
     
     '''----------------------------------------------'''
     
@@ -121,9 +123,11 @@ def writeNewSongs(filePathtoParsedSongs, parsedSong, nchan, swidth, fr, header):
     #print(type(headerAddPart))
     #bytes(headerAddPart, encoding='utf-16')
     mem_buf = io.BytesIO()
-    mem_buf.name = "test.wav"
+    mem_buf.name = fileName
     
-    sf.write( mem_buf, headerAddPart, fr, subtype = 'PCM_16' )
+    #sf.write( mem_buf, headerAddPart, fr, subtype = 'PCM_16' )
+    sf.write( mem_buf, headerAddPart, fr, format='WAV' )
+
     mem_buf.seek( 0 )
     
     hap = sf.SoundFile(io.BytesIO(mem_buf))
@@ -229,8 +233,8 @@ def main():
     fr = 0
 
     userInput = "snare"
-    songPath = '/Users/rohanlingala/Downloads/proj462/wav/' + userInput + ".wav"
-    filePathtoParsedSongs = '/Users/rohanlingala/Downloads/proj462/p_wav/' 
+    songPath = 'C:/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/songs/' + userInput + ".wav"
+    filePathtoParsedSongs = 'C:/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/parsedSong/'
     parsedFN = "16bitsnare"
     
     organizedDict, nchan, swidth, fr,parsedHeader = parseSong(songPath, parsedFN)
