@@ -77,7 +77,7 @@ def writeNewSongs(filePathtoParsedSongs, parsedSong, nchan, swidth, fr, header):
         counter+=1
         
 
-def parseSong(songPath, parseFileName):
+def parseSong(songPath):
     
     '''Rohan: create string that is the directory of new file, we create the path first
     and then create the wav file that belongs in that path in line 24. The reason 
@@ -162,7 +162,7 @@ def main():
     filePathtoParsedSongs = '/Users/rohanlingala/Downloads/proj462/p_wav/' 
     parsedFN = "16bitsnare"
     
-    organizedDict, nchan, swidth, fr,parsedHeader = parseSong(songPath, parsedFN)
+    organizedDict, nchan, swidth, fr,parsedHeader = parseSong(songPath)
     writeNewSongs(filePathtoParsedSongs,organizedDict, nchan, swidth, fr, parsedHeader)
 
     
