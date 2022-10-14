@@ -161,7 +161,7 @@ def parseSong(songPath, parseFileName):
 
     """Josh: simplifying this to be a more clean function"""
     
-    wf = wave.open(songPath, 'rb')
+    wf = wave.open('snare.wav', 'rb')
     
     nchan = wf.getparams().nframes
     swidth = wf.getparams().sampwidth
