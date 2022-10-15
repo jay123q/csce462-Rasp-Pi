@@ -22,43 +22,43 @@ import numpy as np
 import soundfile as sf
 import io
 import struct
-import scipy.io.wavfile
-from scipy.io.wavfile import write
-import bitConversion
+import scipy.io as scipy
+
+import bitHelpers
 
 def buttonSong(parsedSong = dict):
     for i in parsedSong:
         playsound(parsedSong[i])
 
 
-def writeNewSongs(filePathtoParsedSongs, parsedSong, nchan, swidth, fr, header):
-    '''Rohan: BRAIN EXPANSION!'''
+def writeNewSongs(filePathtoParsedSongs, parsedSong, sampleRate):
+    '''This is'''
 
-    counter = 0
+    print(parsedSong)
 
-    for i in parsedSong:
+    for i in range(len(parsedSong)):
 
-        fileName = filePathtoParsedSongs + 'songPart'+str(counter) + '.wav'
-        arr = np.array(parsedSong[i])
-        arr = arr.astype('<U32')
-        headerAddPart = np.concatenate((header.astype('<U32'),arr), axis=0)
+        fileName = filePathtoParsedSongs + 'songPart'+str(i) + '.wav'
+        scipy.wavfile.write(fileName,sampleRate,parsedSong[i])
+        ''' parsedSongNumpy = np.array(parsedSong[i])
+        parsedSongNumpy = parsedSongNumpy.astype('<U32')
+        headerAddPart = np.concatenate((header.astype('<U32'),parsedSongNumpy), axis=0)
         headerAddPart = headerAddPart.astype('float32')
         #headerAddPart = convert_bytearray_to_wav_ndarray(headerAddPart)
-        mem_buf = io.BytesIO( )
+        mem_buf = io.BytesIO( ) # we are converting to a mp3 then back to wav
         mem_buf.name = (fileName)
         sf.write( mem_buf, headerAddPart, fr, format='WAV' )
         mem_buf.seek( 0 )
         data, samplerate = sf.read(mem_buf)
         #fileName = filePathtoParsedSongs + 'songPart'+str(counter) + '.wav'
-        p_data = sf.write(fileName, data , samplerate, subtype='PCM_16')
-        counter+=1
+        p_data = sf.write(fileName, data , samplerate, subtype='PCM_16')'''
 
 
-def parseSong(songPath, parseFileName):
-
+def parseSongOLDFAILED(songPath):
+    '''THIS IS OUTDATED might make a bin file for it later'''
     wf = wave.open(songPath, 'rb')
-    nchan = wf.getparams().nframes
-    swidth = wf.getparams().sampwidth
+    #nchan = wf.getparams().nframes
+    #swidth = wf.getparams().sampwidth
     fr = wf.getparams().framerate
     bin_data = wf.readframes(wf.getparams().nframes)
 
@@ -90,25 +90,34 @@ def parseSong(songPath, parseFileName):
             partSongs[dictKeyIndex].append( bd[i])
             parsingKeyCount+=1
 
-    return partSongs,nchan,swidth,fr,parsedHeader
+    return partSongs,fr,parsedHeader
+
+def parseSongWav(songPath):
+    """implementation of the scipy waveform and parsing it """
+    sampleRate, data = scipy.wavfile.read(songPath)
+    #convert to mono
+    if (data.ndim == 2):
+        # data has two paramaters a data and a channel, set channel to be 0
+        data = data[:,0]
+    box = np.array_split(data,8)
+    return box, sampleRate
+
+    #scipy.wavfile.write(data[len(data)/2:])
+    
 
 
 def main():
-    global nchan
-    nchan = 0
 
-    global swidth 
-    swidth = 0
-    global fr 
-    fr = 0
-
-    userInput = 'dl1'
-    songPath = '/Users/rohanlingala/Downloads/proj462/wav/' + userInput + ".wav"
-    filePathtoParsedSongs = '/Users/rohanlingala/Downloads/proj462/p_wav/' 
-    parsedFN = "16bitsnare"
-
-    organizedDict, nchan, swidth, fr,parsedHeader = parseSong(songPath, parsedFN)
-    writeNewSongs(filePathtoParsedSongs,organizedDict, nchan, swidth, fr, parsedHeader)
+    userInput = 'drumSounds1'
+    # here add a polling system to change the song type & get user input
+    # the buttons a - d ( first 4 will instantly change the song type )
+    songPath = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/songs/' + userInput + '.wav'
+    filePathtoParsedSongs = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/parsedSong/'
+    #parsedFN = "16bitsnare"
+    parsedWavs, sampleRate = parseSongWav(songPath)
+    writeNewSongs(filePathtoParsedSongs,parsedWavs, sampleRate)
+    #organizedDict, fr,parsedHeader = parseSongWav(songPath)
+    #writeNewSongs(filePathtoParsedSongs,organizedDict, fr, parsedHeader)
 
 
 if (__name__ == "__main__"):
