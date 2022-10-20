@@ -8,8 +8,9 @@ https://docs.python.org/3/library/wave.html#module-wave
 https://stackoverflow.com/questions/69291258/reading-wav-as-bytes
 https://stackoverflow.com/questions/45010682/how-can-i-convert-bytes-object-to-decimal-or-binary-representation-in-python
 ROHAN PATH VARIABLES:     
-songPath = '/Users/rohanlingala/Downloads/proj462/wav/' + userInput + ".wav"
-filePathtoParsedSongs = '/Users/rohanlingala/Downloads/proj462/p_wav/' 
+songPath = '/Users/rohanlingala/Documents/GitHub/csce462-Rasp-Pi/project/songs/' + userInput + ".wav"
+filePathtoParsedSongs = '/Users/rohanlingala/Documents/GitHub/csce462-Rasp-Pi/project/parsedSong/' 
+
 JOSH PATH VARIABLES: 
 songPath = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/songs/' + userInput + '.wav'
 filePathtoParsedSongs = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/parsedSong/'
