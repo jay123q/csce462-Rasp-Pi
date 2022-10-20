@@ -2,6 +2,9 @@ import math
 import numpy as np
 import wave
 import contextlib
+from scipy.signal import kaiserord, lfilter, firwin, freqz, firwin2
+
+
 def lowPass(filePath, sampleRate):  
     '''
     
@@ -64,7 +67,7 @@ def lowPass(filePath, sampleRate):
         #print(N)
         # Use moving average (only on first channel)
         filtered = running_mean(channels[0], N).astype('int16')
-        
+        #print(type(filtered))
         '''
         
         the idea is that you can subtract the original signal from the low pass signal and get a 

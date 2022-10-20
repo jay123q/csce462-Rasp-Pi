@@ -36,6 +36,7 @@ def writeNewSongs(filePathtoParsedSongs, parsedSong, sampleRate, lowPass, highPa
         
         #if(lowPass == 1):
         bitHelpers.lowPass(fileName, sampleRate)
+        bitHelpers.highPass()
         
 def songPicker():
     '''logic to up down and select song'''
