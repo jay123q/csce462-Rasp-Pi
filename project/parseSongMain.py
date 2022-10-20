@@ -8,15 +8,15 @@ https://docs.python.org/3/library/wave.html#module-wave
 https://stackoverflow.com/questions/69291258/reading-wav-as-bytes
 https://stackoverflow.com/questions/45010682/how-can-i-convert-bytes-object-to-decimal-or-binary-representation-in-python
 ROHAN PATH VARIABLES:     
-songPath = '/Users/rohanlingala/Documents/GitHub/csce462-Rasp-Pi/project/songs/' + userInput + ".wav"
-filePathtoParsedSongs = '/Users/rohanlingala/Documents/GitHub/csce462-Rasp-Pi/project/parsedSong/' 
-
+songPath = '/Users/rohanlingala/Downloads/proj462/wav/' + userInput + ".wav"
+filePathtoParsedSongs = '/Users/rohanlingala/Downloads/proj462/p_wav/' 
 JOSH PATH VARIABLES: 
 songPath = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/songs/' + userInput + '.wav'
 filePathtoParsedSongs = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/parsedSong/'
 --------------------------------------------------------------------------------------------------------------------------
 '''
 
+from random import sample
 from playsound import playsound #pip install playsound==1.2.2
 import wave
 import numpy as np
@@ -32,12 +32,18 @@ def buttonSong(parsedSong = dict):
         playsound(parsedSong[i])
 
 
-def writeNewSongs(filePathtoParsedSongs, parsedSong, sampleRate):
-   # print(parsedSong)
+def writeNewSongs(filePathtoParsedSongs, parsedSong, sampleRate, lowPass, highPass, speedUp, slowDown):
+    '''This is'''
+    sampleRate = int( speedUp*sampleRate / slowDown )
+
     for i in range(len(parsedSong)):
 
         fileName = filePathtoParsedSongs + 'songPart'+str(i) + '.wav'
         scipy.wavfile.write(fileName,sampleRate,parsedSong[i])
+
+def songPicker():
+    '''logic to up down and select song'''
+
 
 def parseSongWav(songPath):
     """implementation of the scipy waveform and parsing it """
@@ -47,23 +53,72 @@ def parseSongWav(songPath):
         # data has two paramaters a data and a channel, set channel to be 0
         data = data[:,0]
     box = np.array_split(data,8)
-    print(type(box), type(sampleRate))
-
     return box, sampleRate
+
     #scipy.wavfile.write(data[len(data)/2:])
     
 
 
 def main():
 
-    userInput = 'drumSounds1'
-    # here add a polling system to change the song type & get user input
-    # the buttons a - d ( first 4 will instantly change the song type )
-    songPath = '/Users/rohanlingala/Documents/GitHub/csce462-Rasp-Pi/project/songs/' + userInput + ".wav"
-    filePathtoParsedSongs = '/Users/rohanlingala/Documents/GitHub/csce462-Rasp-Pi/project/parsedSong/' 
-    parsedWavs, sampleRate = parseSongWav(songPath)
-    writeNewSongs(filePathtoParsedSongs,parsedWavs, 2*sampleRate)
+    backToLast = 0
+    filePathtoParsedSongs = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/parsedSong/'
+    #parsedFN = "16bitsnare"
 
+
+    # directory control logic here
+    userInput = 'drumSounds1'
+    songPath = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/songs/' + userInput + '.wav'
+    
+
+
+    parsedWavs, sampleRate = parseSongWav(songPath)
+
+    highFilter = 1
+    lowFilter = 1   
+    highFilterPin = 1
+    lowFilterPin = 0
+
+       # test here by changing these values for speedup slowdown 
+    speedUpRate = 1
+    slowDownRate = 1
+    speedUpPin = 1
+    slowDownPin  = 0
+    
+
+
+
+    # replace this block with gpio pin detection
+    if (lowFilterPin):
+        # dumby values change later 
+        # trigger something to filter?
+        lowFilter = 2
+    if (highFilterPin):
+        # some change to apply a filter
+        # trigger something to filter?
+        highFilter = 2
+    
+    # if input detected here change list back to old function
+    if(backToLast):
+        print("shifting back to song select ")
+
+    # replace this block with gpio pin detection
+    if (speedUpPin):
+        speedUpRate = 2
+    if (slowDownPin):
+        # this might need logic to better parse the song
+        slowDownRate = 2
+     
+        
+    if(backToLast):
+        print("shifting back to low/hight")
+
+    
+    writeNewSongs(filePathtoParsedSongs,parsedWavs, sampleRate,lowFilter,highFilter,speedUpRate,slowDownRate)
+    highFilter = 0
+    lowFilter = 0
+    speedUp = 1
+    slowDown = 1
 
 if (__name__ == "__main__"):
     main()
