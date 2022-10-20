@@ -8,24 +8,19 @@ https://docs.python.org/3/library/wave.html#module-wave
 https://stackoverflow.com/questions/69291258/reading-wav-as-bytes
 https://stackoverflow.com/questions/45010682/how-can-i-convert-bytes-object-to-decimal-or-binary-representation-in-python
 ROHAN PATH VARIABLES:     
-songPath = '/Users/rohanlingala/Downloads/proj462/wav/' + userInput + ".wav"
-filePathtoParsedSongs = '/Users/rohanlingala/Downloads/proj462/p_wav/' 
+songPath = '/Users/rohanlingala/Documents/GitHub/csce462-Rasp-Pi/project/songs/' + userInput + ".wav"
+filePathtoParsedSongs = '/Users/rohanlingala/Documents/GitHub/csce462-Rasp-Pi/project/parsedSong/'
 JOSH PATH VARIABLES: 
 songPath = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/songs/' + userInput + '.wav'
 filePathtoParsedSongs = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/parsedSong/'
 --------------------------------------------------------------------------------------------------------------------------
 '''
 
-from random import sample
 from playsound import playsound #pip install playsound==1.2.2
-import wave
 import numpy as np
-import soundfile as sf
-import io
-import struct
 import scipy.io as scipy
-
 import bitHelpers
+
 
 def buttonSong(parsedSong = dict):
     for i in parsedSong:
@@ -33,21 +28,22 @@ def buttonSong(parsedSong = dict):
 
 
 def writeNewSongs(filePathtoParsedSongs, parsedSong, sampleRate, lowPass, highPass, speedUp, slowDown):
-    '''This is'''
     sampleRate = int( speedUp*sampleRate / slowDown )
-
     for i in range(len(parsedSong)):
 
         fileName = filePathtoParsedSongs + 'songPart'+str(i) + '.wav'
         scipy.wavfile.write(fileName,sampleRate,parsedSong[i])
-
+        
+        #if(lowPass == 1):
+            #bitHelpers.lowPass(fileName, sampleRate)
+        
 def songPicker():
     '''logic to up down and select song'''
 
 
 def parseSongWav(songPath):
     """implementation of the scipy waveform and parsing it """
-    sampleRate, data = scipy.wavfile.read(songPath)
+    sampleRate, data = scipy.wavfile.read(songPath)    
     #convert to mono
     if (data.ndim == 2):
         # data has two paramaters a data and a channel, set channel to be 0
@@ -62,16 +58,15 @@ def parseSongWav(songPath):
 def main():
 
     backToLast = 0
-    filePathtoParsedSongs = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/parsedSong/'
+    filePathtoParsedSongs = '/Users/rohanlingala/Documents/GitHub/csce462-Rasp-Pi/project/parsedSong/'
+    #filePathtoParsedSongs = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/parsedSong/'
     #parsedFN = "16bitsnare"
-
 
     # directory control logic here
     userInput = 'drumSounds1'
-    songPath = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/songs/' + userInput + '.wav'
+    songPath = '/Users/rohanlingala/Documents/GitHub/csce462-Rasp-Pi/project/songs/' + userInput + ".wav"
+    #songPath = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/songs/' + userInput + '.wav'
     
-
-
     parsedWavs, sampleRate = parseSongWav(songPath)
 
     highFilter = 1
@@ -82,12 +77,9 @@ def main():
        # test here by changing these values for speedup slowdown 
     speedUpRate = 1
     slowDownRate = 1
-    speedUpPin = 1
+    speedUpPin = 0
     slowDownPin  = 0
     
-
-
-
     # replace this block with gpio pin detection
     if (lowFilterPin):
         # dumby values change later 
