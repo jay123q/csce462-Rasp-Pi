@@ -35,7 +35,7 @@ def writeNewSongs(filePathtoParsedSongs, parsedSong, sampleRate, lowPass, highPa
         scipy.wavfile.write(fileName,sampleRate,parsedSong[i])
         
         #if(lowPass == 1):
-            #bitHelpers.lowPass(fileName, sampleRate)
+        bitHelpers.lowPass(fileName, sampleRate)
         
 def songPicker():
     '''logic to up down and select song'''

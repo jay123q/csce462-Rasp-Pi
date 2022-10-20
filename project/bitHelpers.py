@@ -1,7 +1,7 @@
 import math
 import numpy as np
 import wave
-
+import contextlib
 def lowPass(filePath, sampleRate):  
     '''
     
@@ -46,7 +46,7 @@ def lowPass(filePath, sampleRate):
 
         return channels  
     
-    with wave.open(filePath,'rb') as spf:
+    with contextlib.closing(wave.open(filePath,'rb')) as spf:
         sampleRate = spf.getframerate()
         ampWidth = spf.getsampwidth()
         nChannels = spf.getnchannels()
