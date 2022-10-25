@@ -20,3 +20,4 @@ https://docs.python.org/3/library/wave.html#module-wave
 https://stackoverflow.com/questions/69291258/reading-wav-as-bytes
 https://stackoverflow.com/questions/45010682/how-can-i-convert-bytes-object-to-decimal-or-binary-representation-in-python
 -----------------------------------------------------------------------------------------------------------------------
+Pygame

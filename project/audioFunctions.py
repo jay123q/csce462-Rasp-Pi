@@ -52,10 +52,7 @@ def audioPass(filePath, sampleRate, cutOffFrequency = 1000.0, hPass = False):
         N = int(math.sqrt(0.196196 + freqRatio**2)/freqRatio)
 
         # Use moving average (only on first channel)
-        print(channels[0], len(channels[0]))
-        print("--------------------------")
         filtered = running_mean(channels[0], N).astype('int16')
-        print(filtered, len(filtered))
         
         if (hPass):
             for i in range(len(filtered)):
@@ -84,4 +81,4 @@ def writeSong(pathInput, pathOutput, passState = 0, speedMultiplier = 1.0):
         if (passState == 1):
             audioPass(fName,sampleRate,500.0,False)
         elif (passState == 2):
-            audioPass(fName,sampleRate,1000.0,True)
+            audioPass(fName,sampleRate,3000.0,True)
