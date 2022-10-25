@@ -1,12 +1,9 @@
 import RPi.GPIO as GPIO
-import playsound 
-import numpy as np
-import scipy.io as scipy
+import playsound
 from os import listdir
 from os.path import isfile, join
 
-
-# Local Functions
+# helperFiles/Functions
 import audioFunctions
 
 # Globals
