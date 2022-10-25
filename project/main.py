@@ -1,8 +1,10 @@
 import RPi.GPIO as GPIO
-import bitHelpers
 import playsound 
 import numpy as np
 import scipy.io as scipy
+from os import listdir
+from os.path import isfile, join
+
 
 # Local Functions
 import audioFunctions
@@ -61,10 +63,15 @@ def btn_0100():
 def btn_0101():
     # Settings checked, generate audio.
     global guiStateInd
+    global audioList
     guiStateInd = 2
-    from 
-    parsedWavs, sampleRate = audioFunctions.parseSongWav(songPath)
-
+    
+    inputPath = "./audio/"
+    outputPath = "./parsedAudio/"
+    inputFNames = [f for f in listdir(inputPath) if isfile(join(inputPath, f))]
+    for fName in inputFNames:
+        audioFunctions.writeSong(inputPath+fName, outputPath, passState = 0, speedMultiplier = 1.0)
+        audioList = [outputPath + f for f in listdir(outputPath) if isfile(join(outputPath, f))]
     pass
 
 def btn_0110():

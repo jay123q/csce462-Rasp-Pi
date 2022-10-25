@@ -76,7 +76,8 @@ def parseSongWav(pathInput):
     box = np.array_split(data,8)
     return box, sampleRate
 
-def writeSong(pathInput, pathOutput, parsedSong, sampleRate, passState = 0, speedMultiplier = 1.0):
+def writeSong(pathInput, pathOutput, passState = 0, speedMultiplier = 1.0):
+    parsedSong, sampleRate = parseSongWav(pathInput)
     sampleRate = int(sampleRate*speedMultiplier)
     for i in range(len(parsedSong)):
         fName = pathOutput + str(i+1) + '.wav'
