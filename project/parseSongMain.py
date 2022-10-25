@@ -1,51 +1,25 @@
-'''
--------------------------------parseSong.py-----------------------------------------------------------------------------
-pip install soundfile
-all you need to install! Make sure to change directories in the main. 
-I am going to send the wav file inside the folder in the Github, place it in whatever directory you want :)
-REFERENCES
-https://docs.python.org/3/library/wave.html#module-wave
-https://stackoverflow.com/questions/69291258/reading-wav-as-bytes
-https://stackoverflow.com/questions/45010682/how-can-i-convert-bytes-object-to-decimal-or-binary-representation-in-python
-ROHAN PATH VARIABLES:     
-songPath = '/Users/rohanlingala/Documents/GitHub/csce462-Rasp-Pi/project/songs/' + userInput + ".wav"
-pathOutput = '/Users/rohanlingala/Documents/GitHub/csce462-Rasp-Pi/project/parsedSong/'
-JOSH PATH VARIABLES: 
-songPath = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/songs/' + userInput + '.wav'
-pathOutput = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/parsedSong/'
---------------------------------------------------------------------------------------------------------------------------
-'''
-
+from random import sample
 from playsound import playsound #pip install playsound==1.2.2
 import numpy as np
 import scipy.io as scipy
-import os.path
-# Local Functions
 import bitHelpers
 
-def writeNewSongs(pathOutput, parsedSong, sampleRate, lowPass, highPass, speedUp, slowDown):
-    sampleRate = int( speedUp*sampleRate / slowDown )
+def writeSong(pathOutput, parsedSong, sampleRate, passState = 0, speedMultiplier = 1.0):
+    sampleRate = int(sampleRate*speedMultiplier)
     for i in range(len(parsedSong)):
-
-        fileName = pathOutput + 'songPart'+str(i) + '.wav'
-        scipy.wavfile.write(fileName,sampleRate,parsedSong[i])
-        
-        #if(lowPass == 1):
-        bitHelpers.lowPass(fileName, sampleRate)
+        fName = pathOutput + str(i+1) + '.wav'
+        scipy.wavfile.write(fName, sampleRate, parsedSong[i])
+        if (passState == 1):
+            bitHelpers.lowPass(fName,sampleRate)
+        elif (passState == 2):
+            bitHelpers.highPass(fName,sampleRate)
 
 def parseSongWav(songPath):
-    """implementation of the scipy waveform and parsing it """
     sampleRate, data = scipy.wavfile.read(songPath)    
-    #convert to mono
     if (data.ndim == 2):
-        # data has two paramaters a data and a channel, set channel to be 0
         data = data[:,0]
     box = np.array_split(data,8)
     return box, sampleRate
-
-    #scipy.wavfile.write(data[len(data)/2:])
-    
-
 
 def main():
 
@@ -56,51 +30,11 @@ def main():
     songPath = "./songs/drumSounds1.wav"
 
     parsedWavs, sampleRate = parseSongWav(songPath)
-    
-    highFilter = 1
-    lowFilter = 1   
-    highFilterPin = 1
-    lowFilterPin = 0
 
-       # test here by changing these values for speedup slowdown 
-    speedUpRate = 1
-    slowDownRate = 1
-    speedUpPin = 0
-    slowDownPin  = 0
-    
-    # replace this block with gpio pin detection
-    if (lowFilterPin):
-        # dumby values change later 
-        # trigger something to filter?
-        lowFilter = 2
-    if (highFilterPin):
-        # some change to apply a filter
-        # trigger something to filter?
-        highFilter = 2
-    
-    # if input detected here change list back to old function
-    if(backToLast):
-        print("shifting back to song select ")
-
-    # replace this block with gpio pin detection
-    if (speedUpPin):
-        speedUpRate = 2
-    if (slowDownPin):
-        # this might need logic to better parse the song
-        slowDownRate = 2
-     
-        
-    if(backToLast):
-        print("shifting back to low/hight")
-
-    
-    print("C")
-    writeNewSongs(pathOutput,parsedWavs, sampleRate,lowFilter,highFilter,speedUpRate,slowDownRate)
+    writeSong(pathOutput,parsedWavs, sampleRate,lowFilter,highFilter,speedUpRate,slowDownRate)
     highFilter = 0
     lowFilter = 0
     speedUp = 1
     slowDown = 1
-    print("D")
-
 if (__name__ == "__main__"):
     main()
