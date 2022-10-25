@@ -72,12 +72,12 @@ def parseSongWav(pathInput):
     return box, sampleRate
 
 # Divides audio into 8 segments
-def writeSong(pathInput, pathOutput, fName, passState = 0, speedMultiplier = 1.0):
+def writeSong(pathInput, pathOutput, fName, passState = 0, speedMultiplier = 1.0, fractional = 1.0):
     parsedSong, sampleRate = parseSongWav(pathInput + fName)
     sampleRate = int(sampleRate*speedMultiplier)
     for i in range(len(parsedSong)):
         _fName = pathOutput + str(i+1) + fName
-        scipy.wavfile.write(_fName, sampleRate, parsedSong[i])
+        scipy.wavfile.write(_fName, sampleRate, parsedSong[i][:int(len(parsedSong[i])*fractional)])
         if (passState == 1):
             audioPass(_fName,sampleRate,500.0,False)
         elif (passState == 2):
