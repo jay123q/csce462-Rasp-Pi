@@ -2,21 +2,7 @@ import math
 import numpy as np
 import wave
 import contextlib
-def lowPass(filePath, sampleRate):  
-    '''
-    
-    Yo! I found some code that does a pretty solid low pass on stack overflow i just
-    modified it to meet our parameters. I've set the lowpass pretty agressively to cut everything
-    above 400 hz, so youll basically only here the thumping of the bass and some misc percussive
-    sounds!
-    
-    I liked this solution the best since it does everything "in house" with the imports,
-    so no black boxes! no sirrr!
-    
-    High pass CAN be reverse engineered from the low pass but im hitting a wall with debugging rn.
-    
-    -Brown
-    '''
+def lowPass(filePath, sampleRate, curOffFrequency = 1000.0):
     cutOffFrequency = 1000.0
     # from http://stackoverflow.com/questions/13728392/moving-average-or-running-mean
     def running_mean(x,N):

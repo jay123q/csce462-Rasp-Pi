@@ -9,10 +9,10 @@ https://stackoverflow.com/questions/69291258/reading-wav-as-bytes
 https://stackoverflow.com/questions/45010682/how-can-i-convert-bytes-object-to-decimal-or-binary-representation-in-python
 ROHAN PATH VARIABLES:     
 songPath = '/Users/rohanlingala/Documents/GitHub/csce462-Rasp-Pi/project/songs/' + userInput + ".wav"
-filePathtoParsedSongs = '/Users/rohanlingala/Documents/GitHub/csce462-Rasp-Pi/project/parsedSong/'
+pathOutput = '/Users/rohanlingala/Documents/GitHub/csce462-Rasp-Pi/project/parsedSong/'
 JOSH PATH VARIABLES: 
 songPath = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/songs/' + userInput + '.wav'
-filePathtoParsedSongs = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/parsedSong/'
+pathOutput = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/parsedSong/'
 --------------------------------------------------------------------------------------------------------------------------
 '''
 
@@ -23,17 +23,11 @@ import os.path
 # Local Functions
 import bitHelpers
 
-
-def buttonSong(parsedSong = dict):
-    for i in parsedSong:
-        playsound(parsedSong[i])
-
-
-def writeNewSongs(filePathtoParsedSongs, parsedSong, sampleRate, lowPass, highPass, speedUp, slowDown):
+def writeNewSongs(pathOutput, parsedSong, sampleRate, lowPass, highPass, speedUp, slowDown):
     sampleRate = int( speedUp*sampleRate / slowDown )
     for i in range(len(parsedSong)):
 
-        fileName = filePathtoParsedSongs + 'songPart'+str(i) + '.wav'
+        fileName = pathOutput + 'songPart'+str(i) + '.wav'
         scipy.wavfile.write(fileName,sampleRate,parsedSong[i])
         
         #if(lowPass == 1):
@@ -56,7 +50,7 @@ def parseSongWav(songPath):
 def main():
 
     backToLast = 0
-    filePathtoParsedSongs = './parsedSong/'
+    pathOutput = './parsedSong/'
     #parsedFN = "16bitsnare"
 
     songPath = "./songs/drumSounds1.wav"
@@ -101,7 +95,7 @@ def main():
 
     
     print("C")
-    writeNewSongs(filePathtoParsedSongs,parsedWavs, sampleRate,lowFilter,highFilter,speedUpRate,slowDownRate)
+    writeNewSongs(pathOutput,parsedWavs, sampleRate,lowFilter,highFilter,speedUpRate,slowDownRate)
     highFilter = 0
     lowFilter = 0
     speedUp = 1
