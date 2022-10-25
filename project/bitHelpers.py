@@ -2,26 +2,14 @@ import math
 import numpy as np
 import wave
 import contextlib
-from scipy.signal import kaiserord, lfilter, firwin, freqz, firwin2
 
 
-def lowPass(filePath, sampleRate):  
-    '''
-    
-    Yo! I found some code that does a pretty solid low pass on stack overflow i just
-    modified it to meet our parameters. I've set the lowpass pretty agressively to cut everything
-    above 400 hz, so youll basically only here the thumping of the bass and some misc percussive
-    sounds!
-    
-    I liked this solution the best since it does everything "in house" with the imports,
-    so no black boxes! no sirrr!
-    
-    High pass CAN be reverse engineered from the low pass but im hitting a wall with debugging rn.
-    
-    -Brown
-    '''
+def wavePass(filePath, sampleRate, highPass, lowPass):  
+
+  if(lowPass == 1):
     cutOffFrequency = 1000.0
     # from http://stackoverflow.com/questions/13728392/moving-average-or-running-mean
+    
     def running_mean(x,N):
         cumsum = np.cumsum(np.insert(x, 0, 0)) 
         return (cumsum[N:] - cumsum[:-N]) / float(N)
@@ -30,7 +18,7 @@ def lowPass(filePath, sampleRate):
 
         if sample_width == 1:
             dtype = np.uint8 # unsigned char
-            
+            2
         elif sample_width == 2:
                 dtype = np.int16 # signed 2-byte short
                 
@@ -78,11 +66,14 @@ def lowPass(filePath, sampleRate):
         high_filtered = channels[0] - filtered
         
         '''
+  if(highPass == 1):
+            for i in range(len(filtered)):
+                filtered[i] = channels[0][i] - filtered[i]
         
-        wav_file = wave.open(filePath, "w")
-        wav_file.setparams((1, ampWidth, sampleRate, nFrames, spf.getcomptype(), spf.getcompname()))
-        wav_file.writeframes(filtered.tobytes('C'))
-        wav_file.close()        
+  wav_file = wave.open(filePath, "w")
+  wav_file.setparams((1, ampWidth, sampleRate, nFrames, spf.getcomptype(), spf.getcompname()))
+  wav_file.writeframes(filtered.tobytes('C'))
+  wav_file.close()        
 
 '''
 DEPRECATED FUNCTIONS
