@@ -58,14 +58,12 @@ def parseSongWav(songPath):
 def main():
 
     backToLast = 0
-    filePathtoParsedSongs = '/Users/rohanlingala/Documents/GitHub/csce462-Rasp-Pi/project/parsedSong/'
-    #filePathtoParsedSongs = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/parsedSong/'
+    filePathtoParsedSongs = './parsedSong/'
     #parsedFN = "16bitsnare"
 
     # directory control logic here
     userInput = 'drumSounds1'
-    songPath = '/Users/rohanlingala/Documents/GitHub/csce462-Rasp-Pi/project/songs/' + userInput + ".wav"
-    #songPath = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/songs/' + userInput + '.wav'
+    songPath = './songs/' + userInput + ".wav"
     
     parsedWavs, sampleRate = parseSongWav(songPath)
 
