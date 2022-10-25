@@ -1,2 +1,2 @@
-audio/
-parsedAudio/
+audio/*
+parsedAudio/*
