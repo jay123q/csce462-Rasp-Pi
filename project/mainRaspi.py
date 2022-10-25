@@ -9,7 +9,6 @@ import audioFunctions
 # Globals
 ioPins = [5,6,13,19,26] # [Press Detection, 000X, 00X0, 0X00, X000]
 curState = "0000"
-btnDict = {"0001" : btn_0001,"0010" : btn_0010,"0011" : btn_0011,"0100" : btn_0100,"0101" : btn_0101,"0110" : btn_0110,"0111" : btn_0111,"1000" : btn_1000,"1001" : btn_1001,"1010" : btn_1010,"1011" : btn_1011,"1100" : btn_1100,"1101" : btn_1101,"1110" : btn_1110,"1111" : btn_1111}
 audioSettings = {}
 audioList = ["./parsedAudio/1.wav","./parsedAudio/2.wav","./parsedAudio/3.wav","./parsedAudio/4.wav","./parsedAudio/5.wav","./parsedAudio/6.wav","./parsedAudio/7.wav","./parsedAudio/8.wav",]
 guiStates = [[0,["None","Low","High"]],[0,["None","SpeedUp","SlowDown"]],[0,["Active"]]]
@@ -126,6 +125,8 @@ def btn_1111():
         return
     playsound(audioList[7])
     pass
+
+btnDict = {"0001" : btn_0001,"0010" : btn_0010,"0011" : btn_0011,"0100" : btn_0100,"0101" : btn_0101,"0110" : btn_0110,"0111" : btn_0111,"1000" : btn_1000,"1001" : btn_1001,"1010" : btn_1010,"1011" : btn_1011,"1100" : btn_1100,"1101" : btn_1101,"1110" : btn_1110,"1111" : btn_1111}
 
 def main():
     setup()

@@ -1,4 +1,3 @@
-import RPi.GPIO as GPIO
 import playsound
 from os import listdir
 from os.path import isfile, join
@@ -9,26 +8,18 @@ import audioFunctions
 # Globals
 ioPins = [5,6,13,19,26] # [Press Detection, 000X, 00X0, 0X00, X000]
 curState = "0000"
-btnDict = {"0001" : btn_0001,"0010" : btn_0010,"0011" : btn_0011,"0100" : btn_0100,"0101" : btn_0101,"0110" : btn_0110,"0111" : btn_0111,"1000" : btn_1000,"1001" : btn_1001,"1010" : btn_1010,"1011" : btn_1011,"1100" : btn_1100,"1101" : btn_1101,"1110" : btn_1110,"1111" : btn_1111}
 audioSettings = {}
 audioList = ["./parsedAudio/1.wav","./parsedAudio/2.wav","./parsedAudio/3.wav","./parsedAudio/4.wav","./parsedAudio/5.wav","./parsedAudio/6.wav","./parsedAudio/7.wav","./parsedAudio/8.wav",]
 guiStates = [[0,["None","Low","High"]],[0,["None","SpeedUp","SlowDown"]],[0,["Active"]]]
 guiStateInd = 0
 
 def setup():
-    GPIO.setwarnings(False)
-    GPIO.setmode(GPIO.BCM)
-    for pin in ioPins:
-        GPIO.setup(pin,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    pass
 
 def btnUnpressed():
-    global curState
-    GPIO.wait_for_edge(ioPins[0], GPIO.RISING)
-    for i in range(len(curState)):
-        curState[i] = "1" if (GPIO.input(ioPins[i])) else "0"
     btnDict[curState]()
     pass
-    
+
 def btn_0001():
     # Iterate current setting forward
     if (guiStateInd == 2):
@@ -127,9 +118,16 @@ def btn_1111():
     playsound(audioList[7])
     pass
 
+btnDict = {"0001" : btn_0001,"0010" : btn_0010,"0011" : btn_0011,"0100" : btn_0100,"0101" : btn_0101,"0110" : btn_0110,"0111" : btn_0111,"1000" : btn_1000,"1001" : btn_1001,"1010" : btn_1010,"1011" : btn_1011,"1100" : btn_1100,"1101" : btn_1101,"1110" : btn_1110,"1111" : btn_1111}
+
 def main():
+    global curState
+    global guiStates
+    global guiStateInd
     setup()
     while(True):
+        print(guiStates[guiStateInd])
+        curState = input("Enter state : ")
         btnUnpressed()
         
 if (__name__ == "__main__"):
