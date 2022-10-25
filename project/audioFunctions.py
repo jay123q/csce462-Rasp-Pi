@@ -5,10 +5,12 @@ import numpy as np
 import wave
 import contextlib
 
+# Running mean supports audioPass
 def running_mean(x,N):
     cumsum = np.cumsum(np.insert(x, 0, 0)) 
     return (cumsum[N:] - cumsum[:-N]) / float(N)
 
+# Wave file interpretation
 def interpret_wav(raw_bytes, n_frames, n_channels, sample_width, interleaved = True):
 
     if sample_width == 1:
@@ -29,7 +31,8 @@ def interpret_wav(raw_bytes, n_frames, n_channels, sample_width, interleaved = T
         # channels are not interleaved. All samples from channel M occur before all samples from channel M-1
         channels.shape = (n_channels, n_frames)
     return channels  
-        
+
+# Modifies existing audio for high or low pass filter.
 def audioPass(filePath, sampleRate, cutOffFrequency = 1000.0, hPass = False):
 
     with contextlib.closing(wave.open(filePath,'rb')) as spf:
@@ -63,6 +66,7 @@ def audioPass(filePath, sampleRate, cutOffFrequency = 1000.0, hPass = False):
         wav_file.writeframes(filtered.tobytes('C'))
         wav_file.close()
 
+# Parses Audio
 def parseSongWav(pathInput):
     sampleRate, data = scipy.wavfile.read(pathInput)    
     if (data.ndim == 2):
@@ -70,6 +74,7 @@ def parseSongWav(pathInput):
     box = np.array_split(data,8)
     return box, sampleRate
 
+# Divides audio into 8 segments
 def writeSong(pathInput, pathOutput, passState = 0, speedMultiplier = 1.0):
     parsedSong, sampleRate = parseSongWav(pathInput)
     sampleRate = int(sampleRate*speedMultiplier)
