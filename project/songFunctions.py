@@ -1,1 +1,0 @@
-from playsound import playsound #pip install playsound==1.2.2import waveimport numpy as npimport soundfile as sfimport ioimport structimport scipy.io as scipy#must take in numpy array#must take in int: sample rate        

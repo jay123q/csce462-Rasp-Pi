@@ -19,6 +19,8 @@ filePathtoParsedSongs = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp
 from playsound import playsound #pip install playsound==1.2.2
 import numpy as np
 import scipy.io as scipy
+import os.path
+# Local Functions
 import bitHelpers
 
 
@@ -36,10 +38,6 @@ def writeNewSongs(filePathtoParsedSongs, parsedSong, sampleRate, lowPass, highPa
         
         #if(lowPass == 1):
         bitHelpers.lowPass(fileName, sampleRate)
-        
-def songPicker():
-    '''logic to up down and select song'''
-
 
 def parseSongWav(songPath):
     """implementation of the scipy waveform and parsing it """
@@ -58,17 +56,13 @@ def parseSongWav(songPath):
 def main():
 
     backToLast = 0
-    filePathtoParsedSongs = '/Users/rohanlingala/Documents/GitHub/csce462-Rasp-Pi/project/parsedSong/'
-    #filePathtoParsedSongs = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/parsedSong/'
+    filePathtoParsedSongs = './parsedSong/'
     #parsedFN = "16bitsnare"
 
-    # directory control logic here
-    userInput = 'drumSounds1'
-    songPath = '/Users/rohanlingala/Documents/GitHub/csce462-Rasp-Pi/project/songs/' + userInput + ".wav"
-    #songPath = '/Users/Joshua/Documents/github/PersonalGit/csce462-Rasp-Pi/project/songs/' + userInput + '.wav'
-    
-    parsedWavs, sampleRate = parseSongWav(songPath)
+    songPath = "./songs/drumSounds1.wav"
 
+    parsedWavs, sampleRate = parseSongWav(songPath)
+    
     highFilter = 1
     lowFilter = 1   
     highFilterPin = 1
@@ -106,11 +100,13 @@ def main():
         print("shifting back to low/hight")
 
     
+    print("C")
     writeNewSongs(filePathtoParsedSongs,parsedWavs, sampleRate,lowFilter,highFilter,speedUpRate,slowDownRate)
     highFilter = 0
     lowFilter = 0
     speedUp = 1
     slowDown = 1
+    print("D")
 
 if (__name__ == "__main__"):
     main()

@@ -1,0 +1,9 @@
+adafruit-blinka
+numpy
+playsound
+pygobject
+pycario
+RPi.GPIO
+scipy
+soundfile
+wave
