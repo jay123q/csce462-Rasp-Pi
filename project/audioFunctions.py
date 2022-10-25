@@ -49,10 +49,13 @@ def highPass(filePath, sampleRate, cutOffFrequency = 1000.0):
         N = int(math.sqrt(0.196196 + freqRatio**2)/freqRatio)
 
         # Use moving average (only on first channel)
-        print(channels, len(channels[0]))
+        print(channels[0], len(channels[0]))
         print("--------------------------")
         filtered = running_mean(channels[0], N).astype('int16')
         print(filtered, len(filtered))
+        
+        for i in range(len(filtered)):
+            filtered[i] = channels[0][i] - filtered[i]
         
         '''
         Subtract origin signal from low pass signal = high pass signal.
