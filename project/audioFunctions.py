@@ -30,7 +30,7 @@ def interpret_wav(raw_bytes, n_frames, n_channels, sample_width, interleaved = T
         channels.shape = (n_channels, n_frames)
     return channels  
         
-def highPass(filePath, sampleRate, cutOffFrequency = 1000.0):
+def audioPass(filePath, sampleRate, cutOffFrequency = 1000.0, hPass = False):
 
     with contextlib.closing(wave.open(filePath,'rb')) as spf:
         sampleRate = spf.getframerate()
@@ -54,46 +54,9 @@ def highPass(filePath, sampleRate, cutOffFrequency = 1000.0):
         filtered = running_mean(channels[0], N).astype('int16')
         print(filtered, len(filtered))
         
-        for i in range(len(filtered)):
-            filtered[i] = channels[0][i] - filtered[i]
-        
-        '''
-        Subtract origin signal from low pass signal = high pass signal.
-        https://gist.github.com/piercus/b005ed5fbc70761bde96
-        high_filtered = channels[0] - filteredd
-        '''
-        
-        wav_file = wave.open(filePath, "w")
-        wav_file.setparams((1, ampWidth, sampleRate, nFrames, spf.getcomptype(), spf.getcompname()))
-        wav_file.writeframes(filtered.tobytes('C'))
-        wav_file.close()
-
-def lowPass(filePath, sampleRate, cutOffFrequency = 1000.0):
-    
-    with contextlib.closing(wave.open(filePath,'rb')) as spf:
-        sampleRate = spf.getframerate()
-        ampWidth = spf.getsampwidth()
-        nChannels = spf.getnchannels()
-        nFrames = spf.getnframes()
-
-        # Extract Raw Audio from multi-channel Wav File
-        signal = spf.readframes(nFrames*nChannels)
-        spf.close()
-    
-        channels = interpret_wav(signal, nFrames, nChannels, ampWidth, True)
-
-        # from http://dsp.stackexchange.com/questions/9966/what-is-the-cut-off-frequency-of-a-moving-average-filter
-        freqRatio = (cutOffFrequency/sampleRate)
-        N = int(math.sqrt(0.196196 + freqRatio**2)/freqRatio)
-
-        # Use moving average (only on first channel)
-        filtered = running_mean(channels[0], N).astype('int16')
-        
-        '''
-        Subtract origin signal from low pass signal = high pass signal.
-        https://gist.github.com/piercus/b005ed5fbc70761bde96
-        high_filtered = channels[0] - filteredd
-        '''
+        if (hPass):
+            for i in range(len(filtered)):
+                filtered[i] = channels[0][i] - filtered[i]
         
         wav_file = wave.open(filePath, "w")
         wav_file.setparams((1, ampWidth, sampleRate, nFrames, spf.getcomptype(), spf.getcompname()))
@@ -114,6 +77,6 @@ def writeSong(pathInput, pathOutput, passState = 0, speedMultiplier = 1.0):
         fName = pathOutput + str(i+1) + '.wav'
         scipy.wavfile.write(fName, sampleRate, parsedSong[i])
         if (passState == 1):
-            lowPass(fName,sampleRate,500.0)
+            audioPass(fName,sampleRate,500.0,False)
         elif (passState == 2):
-            highPass(fName,sampleRate,1000.0)
+            audioPass(fName,sampleRate,1000.0,True)
