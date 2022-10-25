@@ -9,7 +9,7 @@ import audioFunctions
 ioPins = [5,6,13,19,26] # [Press Detection, 000X, 00X0, 0X00, X000]
 curState = "0000"
 audioSettings = {}
-audioList = ["./parsedAudio/1.wav","./parsedAudio/2.wav","./parsedAudio/3.wav","./parsedAudio/4.wav","./parsedAudio/5.wav","./parsedAudio/6.wav","./parsedAudio/7.wav","./parsedAudio/8.wav",]
+audioList = []
 guiStates = [[0,["None","Low","High"]],[0,["None","SpeedUp","SlowDown"]],[0,["Active"]]]
 guiStateInd = 0
 
@@ -52,13 +52,18 @@ def btn_0101():
     # Settings checked, generate audio.
     global guiStateInd
     global audioList
+
     guiStateInd = 2
-    
+    speedMultiplier = 1.0
     inputPath = "./audio/"
     outputPath = "./parsedAudio/"
+
     inputFNames = [f for f in listdir(inputPath) if isfile(join(inputPath, f))]
+    speedMultiplier *= 2.0 if (guiStates[1][0] == 1) else 1.0
+    speedMultiplier *= 0.5 if (guiStates[1][0] == 2) else 1.0
+    
     for fName in inputFNames:
-        audioFunctions.writeSong(inputPath+fName, outputPath, passState = 0, speedMultiplier = 1.0)
+        audioFunctions.writeSong(inputPath+fName, outputPath, guiStates[0][0], speedMultiplier)
         audioList = [outputPath + f for f in listdir(outputPath) if isfile(join(outputPath, f))]
     pass
 
@@ -124,8 +129,10 @@ def main():
     global curState
     global guiStates
     global guiStateInd
+    global audioList
     setup()
     while(True):
+        print(audioList)
         print(guiStates[guiStateInd])
         curState = input("Enter state : ")
         btnUnpressed()

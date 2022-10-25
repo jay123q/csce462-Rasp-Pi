@@ -10,7 +10,7 @@ import audioFunctions
 ioPins = [5,6,13,19,26] # [Press Detection, 000X, 00X0, 0X00, X000]
 curState = "0000"
 audioSettings = {}
-audioList = ["./parsedAudio/1.wav","./parsedAudio/2.wav","./parsedAudio/3.wav","./parsedAudio/4.wav","./parsedAudio/5.wav","./parsedAudio/6.wav","./parsedAudio/7.wav","./parsedAudio/8.wav",]
+audioList = []
 guiStates = [[0,["None","Low","High"]],[0,["None","SpeedUp","SlowDown"]],[0,["Active"]]]
 guiStateInd = 0
 
@@ -22,7 +22,7 @@ def setup():
 
 def btnUnpressed():
     global curState
-    GPIO.wait_for_edge(ioPins[0], GPIO.RISING)
+    GPIO.wait_for_edge(ioPins[0], GPIO.RISING) # Waits on any button pressed.
     for i in range(len(curState)):
         curState[i] = "1" if (GPIO.input(ioPins[i])) else "0"
     btnDict[curState]()
