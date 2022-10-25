@@ -16,7 +16,7 @@ guiStateInd = 0
 def setup():
     pass
 
-def btnUnpressed():
+def btnReady():
     btnDict[curState]()
     pass
 
@@ -135,7 +135,7 @@ def main():
         print(audioList)
         print(guiStates[guiStateInd])
         curState = input("Enter state : ")
-        btnUnpressed()
+        btnReady()
         
 if (__name__ == "__main__"):
     main()
