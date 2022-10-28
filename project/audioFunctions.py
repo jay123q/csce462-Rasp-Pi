@@ -1,5 +1,5 @@
 import numpy as np
-import scipy.io as scipy
+import scipy.io.wavfile as scipy
 import math
 import numpy as np
 import wave
