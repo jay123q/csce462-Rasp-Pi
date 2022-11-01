@@ -30,7 +30,7 @@ def btnUnpressed():
     itr+=1
     GPIO.wait_for_edge(ioPins[0], GPIO.RISING) # Waits on any button pressed.
     print("Pressed")
-    i = 500000
+    i = 50000
     bool1, bool2, bool3, bool4 = False, False, False, False
     while (i > 0):
         if (GPIO.input(ioPins[1])):
