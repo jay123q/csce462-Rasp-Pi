@@ -21,7 +21,7 @@ def setup():
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
     for pin in ioPins:
-        GPIO.setup(pin,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(pin,GPIO.IN, pull_up_down=GPIO.PUD_UP)
         #break
 
 def btnUnpressed():
