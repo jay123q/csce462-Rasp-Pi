@@ -24,7 +24,7 @@ def btnUnpressed():
     global curState
     GPIO.wait_for_edge(ioPins[0], GPIO.RISING) # Waits on any button pressed.
     print("Pressed")
-    curState[i] = ("1" if (GPIO.input(ioPins[1])) else "0") + ("1" if (GPIO.input(ioPins[2])) else "0") + ("1" if (GPIO.input(ioPins[3])) else "0") + ("1" if (GPIO.input(ioPins[4])) else "0")
+    curState = ("1" if (GPIO.input(ioPins[1])) else "0") + ("1" if (GPIO.input(ioPins[2])) else "0") + ("1" if (GPIO.input(ioPins[3])) else "0") + ("1" if (GPIO.input(ioPins[4])) else "0")
     print("Button State Pressed", curState)
     #btnDict[curState]()
     pass
