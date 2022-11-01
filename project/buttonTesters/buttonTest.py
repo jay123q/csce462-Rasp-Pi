@@ -21,6 +21,7 @@ def main():
     guiStateInd = 0
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
+    
     for pin in ioPins:
         GPIO.setup(pin,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.add_event_detect(5 , GPIO.RISING, callback=pin5 , bouncetime=200)
