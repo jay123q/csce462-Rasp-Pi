@@ -13,6 +13,7 @@ audioSettings = {}
 audioList = []
 guiStates = [[0,["None","Low","High"]],[0,["None","SpeedUp","SlowDown"]],[0,["Active"]]]
 guiStateInd = 0
+itr = 0
 
 def setup():
     GPIO.setwarnings(False)
@@ -22,10 +23,12 @@ def setup():
 
 def btnUnpressed():
     global curState
+    global itr
     GPIO.wait_for_edge(ioPins[0], GPIO.RISING) # Waits on any button pressed.
     print("Pressed")
     curState = ("1" if (GPIO.input(ioPins[1])) else "0") + ("1" if (GPIO.input(ioPins[2])) else "0") + ("1" if (GPIO.input(ioPins[3])) else "0") + ("1" if (GPIO.input(ioPins[4])) else "0")
     print("Button State Pressed", curState)
+    print("Total buttons pressed", itr)
     #btnDict[curState]()
     pass
     
@@ -132,6 +135,7 @@ btnDict = {"0001" : btn_0001,"0010" : btn_0010,"0011" : btn_0011,"0100" : btn_01
 def main():
     setup()
     while(True):
+
         btnUnpressed()
         
 if (__name__ == "__main__"):
