@@ -24,11 +24,11 @@ def main():
     
     for pin in ioPins:
         GPIO.setup(pin,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.add_event_detect(5 , GPIO.RISING, callback=pin5 , bouncetime=200)
-    GPIO.add_event_detect(6 , GPIO.RISING, callback=pin6 , bouncetime=200)
-    GPIO.add_event_detect(13 , GPIO.RISING, callback=pin13 , bouncetime=200)
-    GPIO.add_event_detect(19 , GPIO.RISING, callback=pin19 , bouncetime=200)
-    GPIO.add_event_detect(26 , GPIO.RISING, callback=pin26 , bouncetime=200)
+    # GPIO.add_event_detect(5 , GPIO.RISING, callback=pin5 , bouncetime=200)
+    # GPIO.add_event_detect(6 , GPIO.RISING, callback=pin6 , bouncetime=200)
+    # GPIO.add_event_detect(13 , GPIO.RISING, callback=pin13 , bouncetime=200)
+    # GPIO.add_event_detect(19 , GPIO.RISING, callback=pin19 , bouncetime=200)
+    # GPIO.add_event_detect(26 , GPIO.RISING, callback=pin26 , bouncetime=200)
     while True: # Run forever
         if GPIO.input(5):
             print("Button was pushed! 5")
