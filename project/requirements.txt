@@ -2,7 +2,6 @@ adafruit-blinka
 numpy
 playsound==1.2.2
 pygobject
-pycario
 RPi.GPIO
 scipy
 soundfile
