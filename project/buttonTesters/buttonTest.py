@@ -21,6 +21,7 @@ def main():
     guiStateInd = 0
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
+    itr = 0
     
     for pin in ioPins:
         GPIO.setup(pin,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -47,6 +48,9 @@ def main():
             print("Button was pushed! 26")
             pushed = True
         if (pushed):
+            itr+=1
+            print("BUTTONPUSHAMT",itr)
+
             t.sleep(1)
 
 if ( __name__ == "__main__"):
