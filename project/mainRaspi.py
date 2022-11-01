@@ -20,14 +20,16 @@ def setup():
     GPIO.setmode(GPIO.BCM)
     for pin in ioPins:
         GPIO.setup(pin,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        break
 
 def btnUnpressed():
     global curState
     global itr
+    itr+=1
     GPIO.wait_for_edge(ioPins[0], GPIO.RISING) # Waits on any button pressed.
     print("Pressed")
-    curState = ("1" if (GPIO.input(ioPins[1])) else "0") + ("1" if (GPIO.input(ioPins[2])) else "0") + ("1" if (GPIO.input(ioPins[3])) else "0") + ("1" if (GPIO.input(ioPins[4])) else "0")
-    print("Button State Pressed", curState)
+    #curState = ("1" if (GPIO.input(ioPins[1])) else "0") + ("1" if (GPIO.input(ioPins[2])) else "0") + ("1" if (GPIO.input(ioPins[3])) else "0") + ("1" if (GPIO.input(ioPins[4])) else "0")
+    #print("Button State Pressed", curState)
     print("Total buttons pressed", itr)
     #btnDict[curState]()
     pass
