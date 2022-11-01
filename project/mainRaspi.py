@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import playsound
+import time
 from os import listdir
 from os.path import isfile, join
 
@@ -139,6 +140,7 @@ def main():
     while(True):
 
         btnUnpressed()
+        time.sleep(1)
         
 if (__name__ == "__main__"):
     main()
