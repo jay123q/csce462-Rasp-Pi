@@ -21,7 +21,7 @@ def setup():
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
     for pin in ioPins:
-        GPIO.setup(pin,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(pin,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         #break
 
 def btnUnpressed():
@@ -30,7 +30,7 @@ def btnUnpressed():
     itr+=1
     GPIO.wait_for_edge(ioPins[0], GPIO.RISING) # Waits on any button pressed.
     print("Pressed")
-    i = 50000
+    i = 500000
     bool1, bool2, bool3, bool4 = False, False, False, False
     while (i > 0):
         if (GPIO.input(ioPins[1])):
