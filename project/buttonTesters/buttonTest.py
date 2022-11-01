@@ -30,20 +30,23 @@ def main():
     # GPIO.add_event_detect(19 , GPIO.RISING, callback=pin19 , bouncetime=200)
     # GPIO.add_event_detect(26 , GPIO.RISING, callback=pin26 , bouncetime=200)
     while True: # Run forever
+        pushed = False
         if GPIO.input(5):
             print("Button was pushed! 5")
-            t.sleep(1)
+            pushed = True
         # if GPIO.input(6):
         #     print("Button was pushed! 6")
         #     t.sleep(1)
         if GPIO.input(13):
             print("Button was pushed! 13")
-            t.sleep(1)
+            pushed = True
         if GPIO.input(19):
             print("Button was pushed! 19")
-            t.sleep(1)
+            pushed = True
         if GPIO.input(26):
             print("Button was pushed! 26")
+            pushed = True
+        if (pushed):
             t.sleep(1)
 
 if ( __name__ == "__main__"):
