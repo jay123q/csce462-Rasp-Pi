@@ -21,28 +21,36 @@ def main():
     guiStateInd = 0
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
+    itr = 0
+    
     for pin in ioPins:
         GPIO.setup(pin,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.add_event_detect(5 , GPIO.RISING, callback=startStates , bouncetime=200)
-    GPIO.add_event_detect(6 , GPIO.RISING, callback=startStates , bouncetime=200)
-    GPIO.add_event_detect(13 , GPIO.RISING, callback=startStates , bouncetime=200)
-    GPIO.add_event_detect(19 , GPIO.RISING, callback=startStates , bouncetime=200)
-    GPIO.add_event_detect(26 , GPIO.RISING, callback=startStates , bouncetime=200)
+    # GPIO.add_event_detect(5 , GPIO.RISING, callback=pin5 , bouncetime=200)
+    # GPIO.add_event_detect(6 , GPIO.RISING, callback=pin6 , bouncetime=200)
+    # GPIO.add_event_detect(13 , GPIO.RISING, callback=pin13 , bouncetime=200)
+    # GPIO.add_event_detect(19 , GPIO.RISING, callback=pin19 , bouncetime=200)
+    # GPIO.add_event_detect(26 , GPIO.RISING, callback=pin26 , bouncetime=200)
     while True: # Run forever
+        pushed = False
         if GPIO.input(5):
             print("Button was pushed! 5")
-            t.sleep(1)
+            pushed = True
         # if GPIO.input(6):
         #     print("Button was pushed! 6")
         #     t.sleep(1)
         if GPIO.input(13):
             print("Button was pushed! 13")
-            t.sleep(1)
+            pushed = True
         if GPIO.input(19):
             print("Button was pushed! 19")
-            t.sleep(1)
+            pushed = True
         if GPIO.input(26):
             print("Button was pushed! 26")
+            pushed = True
+        if (pushed):
+            itr+=1
+            print("BUTTONPUSHAMT",itr)
+
             t.sleep(1)
 
 if ( __name__ == "__main__"):

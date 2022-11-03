@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import playsound
+import time
 from os import listdir
 from os.path import isfile, join
 
@@ -13,19 +14,38 @@ audioSettings = {}
 audioList = []
 guiStates = [[0,["None","Low","High"]],[0,["None","SpeedUp","SlowDown"]],[0,["Active"]]]
 guiStateInd = 0
+itr = 0
+
 
 def setup():
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
     for pin in ioPins:
         GPIO.setup(pin,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        #break
 
 def btnUnpressed():
     global curState
+    global itr
+    itr+=1
     GPIO.wait_for_edge(ioPins[0], GPIO.RISING) # Waits on any button pressed.
-    for i in range(len(curState)):
-        curState[i] = "1" if (GPIO.input(ioPins[i])) else "0"
-    btnDict[curState]()
+    print("Pressed")
+    i = 50000
+    bool1, bool2, bool3, bool4 = False, False, False, False
+    while (i > 0):
+        if (GPIO.input(ioPins[1])):
+            bool1 = True
+        if (GPIO.input(ioPins[2])):
+            bool2 = True
+        if (GPIO.input(ioPins[3])):
+            bool3 = True
+        if (GPIO.input(ioPins[4])):
+            bool4 = True
+        i-=1
+    curState = ("1" if (bool1) else "0") + ("1" if (bool2) else "0") + ("1" if (bool3) else "0") + ("1" if (bool4) else "0")
+    print("Button State Pressed", curState)
+    print("Total buttons pressed", itr)
+    #btnDict[curState]()
     pass
     
 def btn_0001():
@@ -131,7 +151,9 @@ btnDict = {"0001" : btn_0001,"0010" : btn_0010,"0011" : btn_0011,"0100" : btn_01
 def main():
     setup()
     while(True):
+
         btnUnpressed()
+        time.sleep(.5)
         
 if (__name__ == "__main__"):
     main()
