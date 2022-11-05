@@ -1,4 +1,4 @@
-import playsound
+from playsound import playsound 
 from os import listdir
 from os.path import isfile, join
 
@@ -12,7 +12,7 @@ audioSettings = {}
 guiStates = [[0, []], [0, ["None", "Low", "High"]], [0, ["None", "SpeedUp", "SlowDown"]], [5, ["1/4", "1/3", "1/2", "2/3", "3/4", "1"],
                                                                                            [1.0/4.0, 1.0/3.0, 1.0/2.0, 2.0/3.0, 3.0/4.0, 1.0]], [0, ["Active"]]]
 guiStateInd = 0
-
+audioList = []
 
 def setup():
     pass
@@ -161,6 +161,7 @@ def main():
     while(True):
         print(guiStates[guiStateInd])
         curState = input("Enter state : ")
+        print(audioList)
         btnReady()
 
 

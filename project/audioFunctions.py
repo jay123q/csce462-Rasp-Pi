@@ -65,7 +65,7 @@ def audioPass(filePath, sampleRate, cutOffFrequency = 1000.0, hPass = False):
 
 # Parses Audio
 def parseSongWav(pathInput):
-    sampleRate, data = scipy.wavfile.read(pathInput)    
+    sampleRate, data = scipy.read(pathInput)    
     if (data.ndim == 2):
         data = data[:,0]
     box = np.array_split(data,8)
@@ -77,7 +77,7 @@ def writeSong(pathInput, pathOutput, fName, passState = 0, speedMultiplier = 1.0
     sampleRate = int(sampleRate*speedMultiplier)
     for i in range(len(parsedSong)):
         _fName = pathOutput + str(i+1) + fName
-        scipy.wavfile.write(_fName, sampleRate, parsedSong[i][:int(len(parsedSong[i])*fractional)])
+        scipy.write(_fName, sampleRate, parsedSong[i][:int(len(parsedSong[i])*fractional)])
         if (passState == 1):
             audioPass(_fName,sampleRate,500.0,False)
         elif (passState == 2):
