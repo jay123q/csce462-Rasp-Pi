@@ -6,3 +6,4 @@ RPi.GPIO
 scipy
 soundfile
 wave
+pygame

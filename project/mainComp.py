@@ -1,4 +1,4 @@
-from playsound import playsound 
+from pygame import mixer as playsound
 from os import listdir
 from os.path import isfile, join
 
@@ -13,6 +13,7 @@ guiStates = [[0, []], [0, ["None", "Low", "High"]], [0, ["None", "SpeedUp", "Slo
                                                                                            [1.0/4.0, 1.0/3.0, 1.0/2.0, 2.0/3.0, 3.0/4.0, 1.0]], [0, ["Active"]]]
 guiStateInd = 0
 audioList = []
+playsound.init()
 
 def setup():
     pass
@@ -92,56 +93,80 @@ def btn_0111():
 def btn_1000():
     if (guiStateInd != (len(guiStates)-1)):
         return
-    playsound(audioList[0])
+    print("LoadingPlayFile")
+    playsound.music.load(audioList[0])
+    playsound.music.play()
+    print("Passed")
     pass
 
 
 def btn_1001():
     if (guiStateInd != (len(guiStates)-1)):
         return
-    playsound(audioList[1])
+    print("LoadingPlayFile")
+    playsound.music.load(audioList[1])
+    playsound.music.play()
+    print("Passed")
     pass
 
 
 def btn_1010():
     if (guiStateInd != (len(guiStates)-1)):
         return
-    playsound(audioList[2])
+    print("LoadingPlayFile")
+    playsound.music.load(audioList[2])
+    playsound.music.play()
+    print("Passed")
     pass
 
 
 def btn_1011():
     if (guiStateInd != (len(guiStates)-1)):
         return
-    playsound(audioList[3])
+    print("LoadingPlayFile")
+    playsound.music.load(audioList[3])
+    playsound.music.play()
+    print("Passed")
     pass
 
 
 def btn_1100():
     if (guiStateInd != (len(guiStates)-1)):
         return
-    playsound(audioList[4])
+    print("LoadingPlayFile")
+    playsound.music.load(audioList[4])
+    playsound.music.play()
+    print("Passed")
     pass
 
 
 def btn_1101():
     if (guiStateInd != (len(guiStates)-1)):
         return
-    playsound(audioList[5])
+    print("LoadingPlayFile")
+    playsound.music.load(audioList[5])
+    playsound.music.play()
+    print("Passed")
     pass
 
 
 def btn_1110():
     if (guiStateInd != (len(guiStates)-1)):
         return
-    playsound(audioList[6])
+    print("LoadingPlayFile")
+    playsound.music.load(audioList[6])
+    playsound.music.play()
+    print("Passed")
     pass
 
 
 def btn_1111():
     if (guiStateInd != (len(guiStates)-1)):
         return
-    playsound(audioList[7])
+    print("LoadingPlayFile")
+    playsound.music.load(audioList[7])
+    playsound.music.play()
+    print("Passed")
     pass
 
 
