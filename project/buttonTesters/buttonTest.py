@@ -40,6 +40,7 @@ def main():
         #     t.sleep(1)
         print(itr := itr+1)
         print(GPIO.input(5),",",GPIO.input(6),",",GPIO.input(13),",",GPIO.input(19),",",GPIO.input(26))
+        t.sleep(1)
         
 
 if ( __name__ == "__main__"):
