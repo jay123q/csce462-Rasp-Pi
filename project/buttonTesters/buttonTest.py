@@ -2,16 +2,7 @@ import RPi.GPIO as GPIO
 import time as t
 
 
-def pin5():
-    print("event 5 occured ")
-def pin6():
-    print("event 6 occured ")
-def pin13():
-    print("event 13 occured ")
-def pin26():
-    print("event 26 occured ")
-def pin19():
-    print("event 19 occured ")
+
 def main():
     ioPins = [5,6,13,19,26] # [Press Detection, 000X, 00X0, 0X00, X000]
     curState = "0000"
@@ -25,33 +16,29 @@ def main():
     
     for pin in ioPins:
         GPIO.setup(pin,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    # GPIO.add_event_detect(5 , GPIO.RISING, callback=pin5 , bouncetime=200)
-    # GPIO.add_event_detect(6 , GPIO.RISING, callback=pin6 , bouncetime=200)
-    # GPIO.add_event_detect(13 , GPIO.RISING, callback=pin13 , bouncetime=200)
-    # GPIO.add_event_detect(19 , GPIO.RISING, callback=pin19 , bouncetime=200)
-    # GPIO.add_event_detect(26 , GPIO.RISING, callback=pin26 , bouncetime=200)
     while True: # Run forever
         pushed = False
-        if GPIO.input(5):
-            print("Button was pushed! 5")
-            pushed = True
-        # if GPIO.input(6):
-        #     print("Button was pushed! 6")
-        #     t.sleep(1)
-        if GPIO.input(13):
-            print("Button was pushed! 13")
-            pushed = True
-        if GPIO.input(19):
-            print("Button was pushed! 19")
-            pushed = True
-        if GPIO.input(26):
-            print("Button was pushed! 26")
-            pushed = True
-        if (pushed):
-            itr+=1
-            print("BUTTONPUSHAMT",itr)
+        # if GPIO.input(5):
+        #     print("Button was pushed! 5")
+        #     pushed = True
+        # # if GPIO.input(6):
+        # #     print("Button was pushed! 6")
+        # #     t.sleep(1)
+        # if GPIO.input(13):
+        #     print("Button was pushed! 13")
+        #     pushed = True
+        # if GPIO.input(19):
+        #     print("Button was pushed! 19")
+        #     pushed = True
+        # if GPIO.input(26):
+        #     print("Button was pushed! 26")
+        #     pushed = True
+        # if (pushed):
+        #     itr+=1
+        #     print("BUTTONPUSHAMT",itr)
 
-            t.sleep(1)
+        #     t.sleep(1)
+        print(GPIO.input(5),",",GPIO.input(6),",",GPIO.input(13),",",GPIO.input(19),",",GPIO.input(26))
 
 if ( __name__ == "__main__"):
     counter = 0
