@@ -50,7 +50,7 @@ def btnReady():
     pass
    
 def btn_0001():
-    # Iterate current setting forward
+    # Move Cursor Up
     global guiStates
     if (guiStateInd == len(guiStates)-1):
         return
@@ -60,7 +60,7 @@ def btn_0001():
 
 
 def btn_0010():
-    # Iterate current setting backward
+    # Move Cursor Down
     global guiStates
     global guiStateInd
     if (guiStateInd == len(guiStates)-1):

@@ -4,6 +4,7 @@ import math
 import numpy as np
 import wave
 import contextlib
+from aubio import source, tempo
 
 # Running mean supports audioPass
 def running_mean(x,N):
@@ -69,7 +70,29 @@ def parseSongWav(pathInput):
     if (data.ndim == 2):
         data = data[:,0]
     box = np.array_split(data,8)
-    return box, sampleRate
+
+    bpm = 0
+    s = source(pathInput, sampleRate, bpmH := 512)
+    o = tempo("specdiff", bpmW := bpmH*2, bpmH, sampleRate)
+    beats = []
+    total_frames = 0
+
+    while True:
+        samples, read = s()
+        is_beat = o(samples)
+        if is_beat:
+            this_beat = o.get_last_s()
+            beats.append(this_beat)
+            #if o.get_confidence() > .2 and len(beats) > 2.:
+            #    break
+        total_frames += read
+        if read < bpmH:
+            break
+        
+    if len(beats) > 1:
+        bpm = np.median(60./np.diff(beats))
+
+    return box, sampleRate, bpm
 
 # Divides audio into 8 segments
 def writeSong(pathInput, pathOutput, fName, passState = 0, speedMultiplier = 1.0, fractional = 1.0):

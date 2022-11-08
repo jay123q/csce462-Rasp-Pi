@@ -1,0 +1,6 @@
+libsamplerate-dev
+libsndfile1-dev
+libavformat-dev
+libavcodec-dev
+libavutil-dev
+libavresample-dev

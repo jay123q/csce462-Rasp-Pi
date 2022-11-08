@@ -1,9 +1,10 @@
 adafruit-blinka
 numpy
-playsound==1.2.2
-pygobject
 RPi.GPIO
 scipy
 soundfile
 wave
 pygame
+pywavelets
+matplotlib
+pywt

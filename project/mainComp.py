@@ -1,4 +1,5 @@
-from pygame import mixer as playsound
+#from pygame import mixer as playsound
+#import playsound
 from os import listdir
 from os.path import isfile, join
 
@@ -13,7 +14,7 @@ guiStates = [[0, []], [0, ["None", "Low", "High"]], [0, ["None", "SpeedUp", "Slo
                                                                                            [1.0/4.0, 1.0/3.0, 1.0/2.0, 2.0/3.0, 3.0/4.0, 1.0]], [0, ["Active"]]]
 guiStateInd = 0
 audioList = []
-playsound.init()
+#playsound.init()
 
 def setup():
     pass
