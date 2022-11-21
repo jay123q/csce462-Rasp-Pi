@@ -73,11 +73,11 @@ def btn_0101():
     outputPath = "./parsedAudio/"
 
     inputFNames = [f for f in listdir(inputPath) if isfile(join(inputPath, f))]
-    speedMultiplier *= 2.0 if (guiStates[1][0] == 1) else 1.0
-    speedMultiplier *= 0.5 if (guiStates[1][0] == 2) else 1.0
+    speedMultiplier *= 1.5 if (guiStates[2][0] == 1) else 1.0
+    speedMultiplier *= 0.75 if (guiStates[2][0] == 2) else 1.0
     print(speedMultiplier)
     fName = guiStates[0][1][guiStates[0][0]]
-    audioFunctions.writeSong(inputPath, outputPath, fName,
+    audioFunctions.wr0iteSong(inputPath, outputPath, fName,
                              guiStates[0][0], speedMultiplier, guiStates[3][2][guiStates[3][0]])
     audioList = [outputPath +
                  f for f in listdir(outputPath) if isfile(join(outputPath, f))]
