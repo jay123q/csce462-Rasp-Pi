@@ -77,7 +77,7 @@ def btn_0101():
     speedMultiplier *= 0.75 if (guiStates[2][0] == 2) else 1.0
     print(speedMultiplier)
     fName = guiStates[0][1][guiStates[0][0]]
-    audioFunctions.wr0iteSong(inputPath, outputPath, fName,
+    audioFunctions.writeSong(inputPath, outputPath, fName,
                              guiStates[0][0], speedMultiplier, guiStates[3][2][guiStates[3][0]])
     audioList = [outputPath +
                  f for f in listdir(outputPath) if isfile(join(outputPath, f))]
