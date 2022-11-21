@@ -50,6 +50,8 @@ def btn_0011():
     global guiStateInd
     guiStateInd = (guiStateInd + 1) if (guiStateInd +
                                         1 < len(guiStates)) else (guiStateInd)
+    if (guiStateInd == len(guiStates)-1):
+        btn_0101()
     pass
 
 
