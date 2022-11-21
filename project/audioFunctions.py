@@ -96,7 +96,8 @@ def parseSongWav(pathInput):
 
 # Divides audio into 8 segments
 def writeSong(pathInput, pathOutput, fName, passState = 0, speedMultiplier = 1.0, fractional = 1.0):
-    parsedSong, sampleRate = parseSongWav(pathInput + fName)
+    parsedSong, sampleRate, bpm = parseSongWav(pathInput + fName)
+    print(bpm, "BPM Analyzed")
     sampleRate = int(sampleRate*speedMultiplier)
     for i in range(len(parsedSong)):
         _fName = pathOutput + str(i+1) + fName
