@@ -11,6 +11,7 @@ For playsound -> For pygobject -> For pycario ->
 
 
 pip install -r requirements.txt 
+sudo apt-get install libatlas-base-dev
 
 **Resources and References**
 
