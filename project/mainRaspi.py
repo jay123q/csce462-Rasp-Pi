@@ -1,6 +1,5 @@
-import RPi.GPIO as GPIO
-import playsound
-import time
+from pygame import mixer as playsound
+#import playsound
 from os import listdir
 from os.path import isfile, join
 
@@ -8,15 +7,14 @@ from os.path import isfile, join
 import audioFunctions
 
 # Globals
-ioPins = [5,6,13,19,26] # [Press Detection, 000X, 00X0, 0X00, X000]
+ioPins = [5, 6, 13, 19, 26]  # [Press Detection, 000X, 00X0, 0X00, X000]
 curState = "0000"
 audioSettings = {}
-audioList = []
 guiStates = [[0, []], [0, ["None", "Low", "High"]], [0, ["None", "SpeedUp", "SlowDown"]], [5, ["1/4", "1/3", "1/2", "2/3", "3/4", "1"],
                                                                                            [1.0/4.0, 1.0/3.0, 1.0/2.0, 2.0/3.0, 3.0/4.0, 1.0]], [0, ["Active"]]]
 guiStateInd = 0
-itr = 0
-
+audioList = []
+playsound.init()
 
 def setup():
     GPIO.setwarnings(False)
@@ -50,7 +48,7 @@ def btnReady():
     pass
    
 def btn_0001():
-    # Move Cursor Up
+    # Iterate current setting forward
     global guiStates
     if (guiStateInd == len(guiStates)-1):
         return
@@ -58,23 +56,22 @@ def btn_0001():
                                                                     [0] + 1 < len(guiStates[guiStateInd][1])) else (guiStates[guiStateInd][0])
     pass
 
-
 def btn_0010():
-    # Move Cursor Down
+    # Iterate current setting backward
     global guiStates
-    global guiStateInd
     if (guiStateInd == len(guiStates)-1):
         return
     guiStates[guiStateInd][0] = (guiStates[guiStateInd][0] - 1) if (
         guiStates[guiStateInd][0] - 1 > -1) else (guiStates[guiStateInd][0])
     pass
 
-
 def btn_0011():
     # Advance to next state
     global guiStateInd
     guiStateInd = (guiStateInd + 1) if (guiStateInd +
                                         1 < len(guiStates)) else (guiStateInd)
+    if (guiStateInd == len(guiStates)-1):
+        btn_0101()
     pass
 
 
@@ -83,7 +80,6 @@ def btn_0100():
     global guiStateInd
     guiStateInd = (guiStateInd - 1) if (guiStateInd-1 > -1) else (guiStateInd)
     pass
-
 
 
 def btn_0101():
@@ -96,14 +92,17 @@ def btn_0101():
     inputPath = "./audio/"
     outputPath = "./parsedAudio/"
 
-    speedMultiplier *= 2.0 if (guiStates[1][0] == 1) else 1.0
-    speedMultiplier *= 0.5 if (guiStates[1][0] == 2) else 1.0
+    inputFNames = [f for f in listdir(inputPath) if isfile(join(inputPath, f))]
+    speedMultiplier *= 1.5 if (guiStates[2][0] == 1) else 1.0
+    speedMultiplier *= 0.75 if (guiStates[2][0] == 2) else 1.0
+    print(speedMultiplier)
     fName = guiStates[0][1][guiStates[0][0]]
     audioFunctions.writeSong(inputPath, outputPath, fName,
                              guiStates[0][0], speedMultiplier, guiStates[3][2][guiStates[3][0]])
     audioList = [outputPath +
                  f for f in listdir(outputPath) if isfile(join(outputPath, f))]
     pass
+
 
 
 def btn_0110():
@@ -115,54 +114,87 @@ def btn_0111():
     pass
 
 def btn_1000():
-    if (guiStateInd != 2):
+    if (guiStateInd != (len(guiStates)-1)):
         return
-    playsound(audioList[0])
+    print("LoadingPlayFile")
+    playsound.music.load(audioList[0])
+    playsound.music.play()
+    print("Passed")
     pass
+
 
 def btn_1001():
-    if (guiStateInd != 2):
+    if (guiStateInd != (len(guiStates)-1)):
         return
-    playsound(audioList[1])
+    print("LoadingPlayFile")
+    playsound.music.load(audioList[1])
+    playsound.music.play()
+    print("Passed")
     pass
+
 
 def btn_1010():
-    if (guiStateInd != 2):
+    if (guiStateInd != (len(guiStates)-1)):
         return
-    playsound(audioList[2])
+    print("LoadingPlayFile")
+    playsound.music.load(audioList[2])
+    playsound.music.play()
+    print("Passed")
     pass
+
 
 def btn_1011():
-    if (guiStateInd != 2):
+    if (guiStateInd != (len(guiStates)-1)):
         return
-    playsound(audioList[3])
+    print("LoadingPlayFile")
+    playsound.music.load(audioList[3])
+    playsound.music.play()
+    print("Passed")
     pass
+
 
 def btn_1100():
-    if (guiStateInd != 2):
+    if (guiStateInd != (len(guiStates)-1)):
         return
-    playsound(audioList[4])
+    print("LoadingPlayFile")
+    playsound.music.load(audioList[4])
+    playsound.music.play()
+    print("Passed")
     pass
+
 
 def btn_1101():
-    if (guiStateInd != 2):
+    if (guiStateInd != (len(guiStates)-1)):
         return
-    playsound(audioList[5])
+    print("LoadingPlayFile")
+    playsound.music.load(audioList[5])
+    playsound.music.play()
+    print("Passed")
     pass
+
 
 def btn_1110():
-    if (guiStateInd != 2):
+    if (guiStateInd != (len(guiStates)-1)):
         return
-    playsound(audioList[6])
+    print("LoadingPlayFile")
+    playsound.music.load(audioList[6])
+    playsound.music.play()
+    print("Passed")
     pass
+
 
 def btn_1111():
-    if (guiStateInd != 2):
+    if (guiStateInd != (len(guiStates)-1)):
         return
-    playsound(audioList[7])
+    print("LoadingPlayFile")
+    playsound.music.load(audioList[7])
+    playsound.music.play()
+    print("Passed")
     pass
 
-btnDict = {"0001" : btn_0001,"0010" : btn_0010,"0011" : btn_0011,"0100" : btn_0100,"0101" : btn_0101,"0110" : btn_0110,"0111" : btn_0111,"1000" : btn_1000,"1001" : btn_1001,"1010" : btn_1010,"1011" : btn_1011,"1100" : btn_1100,"1101" : btn_1101,"1110" : btn_1110,"1111" : btn_1111}
+
+btnDict = {"0001": btn_0001, "0010": btn_0010, "0011": btn_0011, "0100": btn_0100, "0101": btn_0101, "0110": btn_0110, "0111": btn_0111,
+           "1000": btn_1000, "1001": btn_1001, "1010": btn_1010, "1011": btn_1011, "1100": btn_1100, "1101": btn_1101, "1110": btn_1110, "1111": btn_1111}
 
 def main():
     global curState
@@ -176,6 +208,7 @@ def main():
     while(True):
         print(guiStates[guiStateInd])
         curState = input("Enter state : ")
+        print(audioList)
         btnReady()
         
 if (__name__ == "__main__"):
