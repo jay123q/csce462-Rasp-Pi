@@ -2,6 +2,7 @@ from pygame import mixer as playsound
 #import playsound
 from os import listdir
 from os.path import isfile, join
+import RPi.GPIO as GPIO
 
 # helperFiles/Functions
 import audioFunctions
