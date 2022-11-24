@@ -15,6 +15,7 @@ guiStates = [[0, []], [0, ["None", "Low", "High"]], [0, ["None", "SpeedUp", "Slo
                                                                                            [1.0/4.0, 1.0/3.0, 1.0/2.0, 2.0/3.0, 3.0/4.0, 1.0]], [0, ["Active"]]]
 guiStateInd = 0
 audioList = []
+itr = 0
 playsound.init()
 
 def setup():
