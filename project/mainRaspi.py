@@ -208,7 +208,6 @@ def main():
     guiStates[0][1] = inputFNames
     while(True):
         print(guiStates[guiStateInd])
-        curState = input("Enter state : ")
         print(audioList)
         btnReady()
         
