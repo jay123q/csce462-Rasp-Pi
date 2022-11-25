@@ -31,7 +31,7 @@ def btnReady():
     itr+=1
     GPIO.wait_for_edge(ioPins[0], GPIO.RISING) # Waits on any button pressed.
     print("Pressed")
-    i = 50000
+    i = 999999
     bool1, bool2, bool3, bool4 = False, False, False, False
     while (i > 0):
         if (GPIO.input(ioPins[1])):
@@ -195,8 +195,8 @@ def btn_1111():
     pass
 
 
-btnDict = {"0001": btn_0001, "0010": btn_0010, "0011": btn_0011, "0100": btn_0100, "0101": btn_0101, "0110": btn_0110, "0111": btn_0111,
-           "1000": btn_1000, "1001": btn_1001, "1010": btn_1010, "1011": btn_1011, "1100": btn_1100, "1101": btn_1101, "1110": btn_1110, "1111": btn_1111}
+btnDict = {"0110": btn_0001, "0101": btn_0010, "1101": btn_0011, "1001": btn_0100, "0001": btn_0101, "0110": btn_0110, "1111": btn_0111,
+           "0111": btn_1000, "1011": btn_1001, "0011": btn_1010, "0100": btn_1011, "0010": btn_1100, "1110": btn_1101, "1010": btn_1110, "1000": btn_1111}
 
 def main():
     global curState
