@@ -44,8 +44,8 @@ def btnReady():
             bool4 = True
         i-=1
     curState = ("1" if (bool1) else "0") + ("1" if (bool2) else "0") + ("1" if (bool3) else "0") + ("1" if (bool4) else "0")
-    if (curState == '0000'):
-        pass
+    if (curState not in btnDict):
+        return
     print("Button State Pressed", curState)
     print("Total buttons pressed", itr)
     btnDict[curState]()
