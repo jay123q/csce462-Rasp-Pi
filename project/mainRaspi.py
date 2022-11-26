@@ -53,6 +53,7 @@ def btnReady():
    
 def btn_0001():
     # Iterate current setting forward
+    print("Q")
     global guiStates
     if (guiStateInd == len(guiStates)-1):
         return
@@ -62,6 +63,7 @@ def btn_0001():
 
 def btn_0010():
     # Iterate current setting backward
+    print("W")
     global guiStates
     if (guiStateInd == len(guiStates)-1):
         return
@@ -71,6 +73,7 @@ def btn_0010():
 
 def btn_0011():
     # Advance to next state
+    print("E")
     global guiStateInd
     guiStateInd = (guiStateInd + 1) if (guiStateInd +
                                         1 < len(guiStates)) else (guiStateInd)
@@ -81,6 +84,7 @@ def btn_0011():
 
 def btn_0100():
     # Backtrack to prior state
+    print("R")
     global guiStateInd
     guiStateInd = (guiStateInd - 1) if (guiStateInd-1 > -1) else (guiStateInd)
     pass
