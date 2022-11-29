@@ -29,25 +29,25 @@ def setup():
 
 def btn_0001():
     # Iterate current setting forward
-    print("B")
+    print("E")
     pass
 
 
 def btn_0010():
-    # Iterate current setting backward
-    print("D")
+    # select right option
+    print("C")
     pass
 
 def btn_0011():
     # Advance to next state
-    print("C")
+    print("D")
     pass
 
 
 
 def btn_0100():
-    # Backtrack to prior state
-    print("E")
+    # back state
+    print("B")
     pass
 
 
