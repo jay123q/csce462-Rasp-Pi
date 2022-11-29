@@ -140,12 +140,9 @@ def main():
     global guiStateInd
     global audioList
     setup()
-    inputPath = "./audio/"
-    inputFNames = [f for f in listdir(inputPath) if isfile(join(inputPath, f))]
-    guiStates[0][1] = inputFNames
+
     while(True):
-        print(guiStates[guiStateInd])
-        print(audioList)
+
         btnReady()
         
 if (__name__ == "__main__"):
