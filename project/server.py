@@ -5,11 +5,11 @@ import tornado.httpserver
 import asyncio
 from tornado import gen
 
-#from pygame import mixer as playsound
-import playsound
+from pygame import mixer as playsound
+# import playsound
 from os import listdir
 from os.path import isfile, join, dirname
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 
 # helperFiles/Functions
 import audioFunctions
@@ -94,33 +94,51 @@ class mainRaspi:
         self.app.listen(8888)
 
         self.io_loop = tornado.ioloop.IOLoop.current()
-
+        periodic_callback = tornado.ioloop.PeriodicCallback(
+        lambda: self.btnReady(), 1)
+        periodic_callback.start()
         self.io_loop.start()
         
     def sample(self):
         return None
 
     def setup(self):
-        pass
-    @gen.coroutine
-    async def generate_message_to_sockets():
-        while True:
-            print ('new messageToCon: ', msg)
-            futures = [con.write_message(msg) for con in HandlerWebSocket.connections]
-            if futures:
-                await asyncio.wait(futures)
-            await gen.sleep(1.0)
+        GPIO.setwarnings(False)
+        GPIO.setmode(GPIO.BCM)
+        for pin in self.ioPins:
+            GPIO.setup(pin,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+            #break
+
             
-    @gen.coroutine
-    async def btnReady(self):
-        print("Hit")
-        while True:
-            bool1,bool2,bool3,bool4 = True,True,True,True
-            curState = ("1" if (bool1) else "0") + ("1" if (bool2) else "0") + ("1" if (bool3) else "0") + ("1" if (bool4) else "0")
-            WebSocketServer.send_message(
-                str(self.guiStateInd) + str(self.guiStates))
-            self.btnDict[self.curState]()
-            await gen.sleep(0.01)
+    def btnReady(self):
+        if not (GPIO.input(self.ioPins[0])):
+            return
+        i = 99999
+        bool1, bool2, bool3, bool4 = False, False, False, False
+        while (i > 0):
+            if (GPIO.input(self.ioPins[1])):
+                bool1 = True
+            if (GPIO.input(self.ioPins[2])):
+                bool2 = True
+            if (GPIO.input(self.ioPins[3])):
+                bool3 = True
+            if (GPIO.input(self.ioPins[4])):
+                bool4 = True
+            i-=1
+        self.curState = ("1" if (bool1) else "0") + ("1" if (bool2) else "0") + ("1" if (bool3) else "0") + ("1" if (bool4) else "0")
+        if (self.curState not in self.btnDict):
+            return
+        print("Button State Pressed", self.curState)
+        print("Total buttons pressed", self.itr)
+        self.btnDict[self.curState]()
+        
+        if (bool1 == False):
+            return
+        WebSocketServer.send_message("HELLO")
+        bool1,bool2,bool3,bool4 = True,True,True,True
+        self.curState = "0110"
+        self.btnDict[self.curState]()
+        return str(self.guiStateInd) + str(self.guiStates)
 
 
     def btn_0001(self):
