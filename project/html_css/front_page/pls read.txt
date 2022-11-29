@@ -1,3 +1,0 @@
-there is a JS file that is referencing Webflow, 
-i didnt think it was needed so I commented it out, if it is needed
-pls download it and add it the the directory.

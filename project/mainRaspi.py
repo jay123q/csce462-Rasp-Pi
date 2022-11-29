@@ -51,9 +51,9 @@ def btnReady():
     btnDict[curState]()
     pass
    
-def btn_0001():
+def btn_0010():
     # Iterate current setting forward
-    print("Q")
+    print("D")
     global guiStates
     if (guiStateInd == len(guiStates)-1):
         return
@@ -61,9 +61,9 @@ def btn_0001():
                                                                     [0] + 1 < len(guiStates[guiStateInd][1])) else (guiStates[guiStateInd][0])
     pass
 
-def btn_0010():
+def btn_0001():
     # Iterate current setting backward
-    print("W")
+    print("B")
     global guiStates
     if (guiStateInd == len(guiStates)-1):
         return
@@ -73,7 +73,7 @@ def btn_0010():
 
 def btn_0011():
     # Advance to next state
-    print("E")
+    print("C")
     global guiStateInd
     guiStateInd = (guiStateInd + 1) if (guiStateInd +
                                         1 < len(guiStates)) else (guiStateInd)
@@ -84,7 +84,7 @@ def btn_0011():
 
 def btn_0100():
     # Backtrack to prior state
-    print("R")
+    print("E")
     global guiStateInd
     guiStateInd = (guiStateInd - 1) if (guiStateInd-1 > -1) else (guiStateInd)
     pass
@@ -114,11 +114,40 @@ def btn_0101():
 
 
 def btn_0110():
-    # Free Button
+    # play whole song with presets
+    print("A")
+    btn_1000()
+    btn_1001()
+    btn_1010()
+    btn_1011()
+    btn_1100()
+    btn_1101()
+    btn_1110()
+    btn_1111()
+    print("Passed")
     pass
 
 def btn_0111():
-    # Free Button
+    # Reset presents
+    global guiStateInd
+    global audioList
+    # guiStates = [[0, []], [0, ["None", "Low", "High"]], [0, ["None", "SpeedUp", "SlowDown"]], [5, ["1/4", "1/3", "1/2", "2/3", "3/4", "1"],
+    #                                                                                        [1.0/4.0, 1.0/3.0, 1.0/2.0, 2.0/3.0, 3.0/4.0, 1.0]], [0, ["Active"]]]
+    guiStateInd = len(guiStates)-1
+    speedMultiplier = 1.0
+    inputPath = "./audio/"
+    outputPath = "./parsedAudio/"
+
+    inputFNames = [f for f in listdir(inputPath) if isfile(join(inputPath, f))]
+    speedMultiplier = 1
+
+    print(speedMultiplier)
+    fName = guiStates[0][1][guiStates[0][0]]
+    audioFunctions.writeSong(inputPath, outputPath, fName,
+                             guiStates[0][0], speedMultiplier, guiStates[3][2][guiStateInd])
+    audioList = [outputPath +
+                 f for f in listdir(outputPath) if isfile(join(outputPath, f))]
+
     pass
 
 def btn_1000():
@@ -201,8 +230,12 @@ def btn_1111():
     pass
 
 
-btnDict = {"0110": btn_0001, "0101": btn_0010, "1101": btn_0011, "1001": btn_0100, "0100": btn_0101, "0110": btn_0110, "1111": btn_0111,
-           "0111": btn_1000, "1011": btn_1001, "0011": btn_1010, "0100": btn_1011, "0010": btn_1100, "1110": btn_1101, "1010": btn_1110, "1000": btn_1111}
+btnDict = {"1000": btn_1000 , "0110": btn_0110 , "0101": btn_0101 , "1101": btn_1101 ,"1001": btn_1001 ,"0001": btn_0001 
+,"1100": btn_1100 ,"1010":btn_1010  ,"1110":btn_1110,"0010": btn_0010,"0100": btn_0100,"0011":btn_0011,"1011":btn_1101,"0111":btn_0111,"1111":btn_1111}
+# old clapp remapp btnDict = {"1000": btn_0110 , "0110": btn_0001 , "0101": btn_0011 , "1101": btn_0010 ,"1001": btn_0100 ,"0001": btn_0101 
+# ,"1100": btn_0111 ,"1010": btn_1000 ,"1110":btn_1001,"0010":btn_1010,"0100": btn_1011,"0011":btn_1100,"1011":btn_1101,"0111":btn_1110,"1111":btn_1111}
+# old chong way btnDict = {"0110": btn_0001, "0101": btn_0010, "1101": btn_0011, "1001": btn_0100, "0100": btn_0101, "0110": btn_0110, "1111": btn_0111,
+#            "0111": btn_1000, "1011": btn_1001, "0011": btn_1010, "0100": btn_1011, "0010": btn_1100, "1110": btn_1101, "1010": btn_1110, "1000": btn_1111}
 
 def main():
     global curState
