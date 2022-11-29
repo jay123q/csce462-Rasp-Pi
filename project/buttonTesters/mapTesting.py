@@ -5,7 +5,7 @@ from os.path import isfile, join
 import RPi.GPIO as GPIO
 
 # helperFiles/Functions
-import audioFunctions
+
 
 # Globals
 ioPins = [5, 6, 13, 19, 26]  # [Press Detection, 000X, 00X0, 0X00, X000]
@@ -26,7 +26,7 @@ def setup():
     for pin in ioPins:
         GPIO.setup(pin,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         #break
-        
+
 def btn_0001():
     # Iterate current setting forward
     print("B")
