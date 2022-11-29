@@ -17,6 +17,19 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("./html_css/frontpage.html")
 
+class fs(tornado.web.RequestHandler):
+    def get(self):
+        self.render("./html_css/filterselect.html")
+
+class ss(tornado.web.RequestHandler):
+    def get(self):
+        self.render("./html_css/songselect.html")
+
+class ts(tornado.web.RequestHandler):
+    def get(self):
+        self.render("./html_css/timestrechselect.html")
+
+
 
 class WebSocketServer(tornado.websocket.WebSocketHandler):
     # Note that `clients` is a class variable and `send_message` is a
@@ -45,7 +58,7 @@ class mainRaspi:
         }
         
         self.app = tornado.web.Application(
-            handlers = [(r"/", MainHandler),
+            handlers = [(r"/", MainHandler),(r"/filterselect", fs),(r"/songselect", ss),(r"/timestrechselect", ts),
             (r"/websocket/", WebSocketServer),
             (r"/(.*)",tornado.web.StaticFileHandler, {"path": "./html_css"},),
              ],
