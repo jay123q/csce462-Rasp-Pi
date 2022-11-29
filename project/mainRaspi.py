@@ -53,7 +53,7 @@ def btnReady():
    
 def btn_0001():
     # Iterate current setting forward
-    print("Q")
+    print("B")
     global guiStates
     if (guiStateInd == len(guiStates)-1):
         return
@@ -63,7 +63,7 @@ def btn_0001():
 
 def btn_0010():
     # Iterate current setting backward
-    print("W")
+    print("D")
     global guiStates
     if (guiStateInd == len(guiStates)-1):
         return
@@ -73,7 +73,7 @@ def btn_0010():
 
 def btn_0011():
     # Advance to next state
-    print("E")
+    print("C")
     global guiStateInd
     guiStateInd = (guiStateInd + 1) if (guiStateInd +
                                         1 < len(guiStates)) else (guiStateInd)
@@ -84,7 +84,7 @@ def btn_0011():
 
 def btn_0100():
     # Backtrack to prior state
-    print("R")
+    print("E")
     global guiStateInd
     guiStateInd = (guiStateInd - 1) if (guiStateInd-1 > -1) else (guiStateInd)
     pass
@@ -201,8 +201,10 @@ def btn_1111():
     pass
 
 
-btnDict = {"0110": btn_0001, "0101": btn_0010, "1101": btn_0011, "1001": btn_0100, "0100": btn_0101, "0110": btn_0110, "1111": btn_0111,
-           "0111": btn_1000, "1011": btn_1001, "0011": btn_1010, "0100": btn_1011, "0010": btn_1100, "1110": btn_1101, "1010": btn_1110, "1000": btn_1111}
+btnDict = {"1000": btn_0110 , "0110": btn_0001 , "0101": btn_0011 , "1101": btn_0010 ,"1001": btn_0100 ,"0001": btn_0101 
+,"1100": btn_0111 ,"1010": btn_1000 ,"1110":btn_1001,"0010":btn_1010,"0100": btn_1011,"0011":btn_1100,"1011":btn_1101,"0111":btn_1110,"1111":btn_1111}
+# btnDict = {"0110": btn_0001, "0101": btn_0010, "1101": btn_0011, "1001": btn_0100, "0100": btn_0101, "0110": btn_0110, "1111": btn_0111,
+#            "0111": btn_1000, "1011": btn_1001, "0011": btn_1010, "0100": btn_1011, "0010": btn_1100, "1110": btn_1101, "1010": btn_1110, "1000": btn_1111}
 
 def main():
     global curState
