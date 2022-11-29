@@ -38,8 +38,8 @@ class WebSocketClient:
         if message is None:
             print("Disconnected, reconnecting...")
             self.connect_and_read()
-
-        [client.write_message(message) for client in self.connections]
+        self.connection.write_message(message)
+ 
 
 
 def main():
@@ -54,6 +54,7 @@ def main():
 
     # Start the event loop.
     io_loop.start()
+    print("S")
 
 
 if __name__ == "__main__":

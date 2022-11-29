@@ -8,7 +8,7 @@ class MainHandler(tornado.web.RequestHandler):
  
 class SimpleWebSocket(tornado.websocket.WebSocketHandler):
     connections = set()
-    
+
     def open(self):
         self.connections.add(self)
  
