@@ -136,6 +136,17 @@
     crossorigin="anonymous"></script>
   <div id="torrent-scanner-popup" style="display: none;"></div>
 
+  <script>
+    var ws = new WebSocket("ws://localhost:8888/websocket");
+ 
+    ws.onmessage = function(evt) {
+        var messageDict = JSON.parse(evt.data);
+        // Create a div with the format `user: message`.
+        var messageBox = document.createElement("div");
+        messageBox.innerHTML = messageDict.user + ": " + messageDict.message;
+        document.getElementById("messages").appendChild(messageBox);
+    };
+    </script>
 
 </body>
 <grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>

@@ -2,6 +2,8 @@ import tornado.ioloop
 import tornado.web
 import tornado.websocket
 import tornado.httpserver
+import asyncio
+from tornado import gen
 
 #from pygame import mixer as playsound
 import playsound
@@ -17,18 +19,20 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("./html_css/frontpage.html")
 
+
 class fs(tornado.web.RequestHandler):
     def get(self):
         self.render("./html_css/filterselect.html")
+
 
 class ss(tornado.web.RequestHandler):
     def get(self):
         self.render("./html_css/songselect.html")
 
+
 class ts(tornado.web.RequestHandler):
     def get(self):
         self.render("./html_css/timestrechselect.html")
-
 
 
 class WebSocketServer(tornado.websocket.WebSocketHandler):
@@ -53,30 +57,6 @@ class WebSocketServer(tornado.websocket.WebSocketHandler):
 class mainRaspi:
 
     def __init__(self):
-        settings = {
-            "static_path": join(dirname(__file__), "static"),
-        }
-        
-        self.app = tornado.web.Application(
-            handlers = [(r"/", MainHandler),(r"/filterselect", fs),(r"/songselect", ss),(r"/timestrechselect", ts),
-            (r"/websocket/", WebSocketServer),
-            (r"/(.*)",tornado.web.StaticFileHandler, {"path": "./html_css"},),
-             ],
-            
-            websocket_ping_interval=100,
-            websocket_ping_timeout=300,
-            **settings
-        )
-        
-        self.app.listen(8888)
-
-        self.io_loop = tornado.ioloop.IOLoop.current()
-
-        periodic_callback = tornado.ioloop.PeriodicCallback(
-            lambda: WebSocketServer.send_message(str(1)), 100
-        )
-        periodic_callback.start()
-        self.io_loop.start()
 
         # [Press Detection, 000X, 00X0, 0X00, X000]
         self.ioPins = [5, 6, 13, 19, 26]
@@ -92,18 +72,56 @@ class mainRaspi:
         self.btnDict = {"011X": self.btn_0001, "0101": self.btn_0010, "1101": self.btn_0011, "1001": self.btn_0100, "0100": self.btn_0101, "0110": self.btn_0110, "1111": self.btn_0111,
                         "0111": self.btn_1000, "1011": self.btn_1001, "0011": self.btn_1010, "0100": self.btn_1011, "0010": self.btn_1100, "1110": self.btn_1101, "1010": self.btn_1110, "1000": self.btn_1111}
 
+        self.appStart()
+
+    def appStart(self):
+        settings = {
+            "static_path": join(dirname(__file__), "static"),
+        }
+        self.app = tornado.web.Application(
+            handlers=[(r"/", MainHandler), (r"/filterselect", fs), (r"/songselect", ss), (r"/timestrechselect", ts),
+                      (r"/websocket", WebSocketServer),
+                      (r"/(.*)", tornado.web.StaticFileHandler,
+                       {"path": "./html_css"},),
+                      ],
+
+            websocket_ping_interval=100,
+            websocket_ping_timeout=300,
+            **settings
+        )
+        
+        
+        self.app.listen(8888)
+
+        self.io_loop = tornado.ioloop.IOLoop.current()
+
+        self.io_loop.start()
+        
     def sample(self):
         return None
 
     def setup(self):
         pass
+    @gen.coroutine
+    async def generate_message_to_sockets():
+        while True:
+            print ('new messageToCon: ', msg)
+            futures = [con.write_message(msg) for con in HandlerWebSocket.connections]
+            if futures:
+                await asyncio.wait(futures)
+            await gen.sleep(1.0)
+            
+    @gen.coroutine
+    async def btnReady(self):
+        print("Hit")
+        while True:
+            bool1,bool2,bool3,bool4 = True,True,True,True
+            curState = ("1" if (bool1) else "0") + ("1" if (bool2) else "0") + ("1" if (bool3) else "0") + ("1" if (bool4) else "0")
+            WebSocketServer.send_message(
+                str(self.guiStateInd) + str(self.guiStates))
+            self.btnDict[self.curState]()
+            await gen.sleep(0.01)
 
-    def btnReady(self):
-
-        WebSocketServer.send_message(
-            str(self.guiStateInd) + str(self.guiStates))
-        self.btnDict[self.curState]()
-        pass
 
     def btn_0001(self):
         # Iterate current setting forward
@@ -242,18 +260,8 @@ class mainRaspi:
 
 def main():
     raspi = mainRaspi()
-    inputPath = "./audio/"
-    inputFNames = [f for f in listdir(inputPath) if isfile(join(inputPath, f))]
-    raspi.guiStates[0][1] = inputFNames
-    while(True):
-        # print(raspi.guiStates[raspi.guiStateInd])
-        # print(raspi.audioList)
-        # raspi.btnReady()
+    print("Halted")
 
-        print(raspi.guiStates[raspi.guiStateInd])
-        raspi.curState = input("Enter state : ")
-        print(raspi.audioList)
-        raspi.btnReady()
 
 
 if __name__ == "__main__":
