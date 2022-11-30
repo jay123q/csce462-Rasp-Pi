@@ -151,7 +151,7 @@ class mainRaspi:
         self.guiStates[self.guiStateInd][0] = (self.guiStates[self.guiStateInd][0] + 1) if (self.guiStates[self.guiStateInd]
                                                                                             [0] + 1 < len(self.guiStates[self.guiStateInd][1])) else (self.guiStates[self.guiStateInd][0])
         pass
-
+    
     def btn_0001(self):
         # Iterate current setting backward
         if (self.guiStateInd == len(self.guiStates)-1):
@@ -159,6 +159,7 @@ class mainRaspi:
         self.guiStates[self.guiStateInd][0] = (self.guiStates[self.guiStateInd][0] - 1) if (
             self.guiStates[self.guiStateInd][0] - 1 > -1) else (self.guiStates[self.guiStateInd][0])
         pass
+
 
     def btn_0011(self):
         # Advance to next state

@@ -27,28 +27,26 @@ def setup():
         GPIO.setup(pin,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         #break
 
-def btn_0001():
-    # Iterate current setting forward
-    print("E")
-    pass
-
-
 def btn_0010():
-    # select right option
-    print("C")
-    pass
+    # Iterate current setting forward
+    print("D")
+
+
+def btn_0001():
+    # Iterate current setting backward
+    print("B")
+
 
 def btn_0011():
     # Advance to next state
-    print("D")
-    pass
+    print("C")
 
 
 
 def btn_0100():
-    # back state
-    print("B")
-    pass
+    # Backtrack to prior state
+    print("E")
+
 
 
 
