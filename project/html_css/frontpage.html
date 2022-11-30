@@ -239,7 +239,7 @@
     var messageDict = JSON.parse(evt.data);
     console.log(messageDict);
     console.log(messageDict[0]);
-    if (messageDict[0] != curPage){
+    if (messageDict[0] != curPage && (messageDist[0] < 4)){
       document.getElementById("page" + curPage.toString() + "b").style.display = "none";
       curPage = messageDict[0]
       document.getElementById("page" + curPage.toString() + "b").style.display = "inline";

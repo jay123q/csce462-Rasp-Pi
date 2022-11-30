@@ -227,9 +227,7 @@ class mainRaspi:
 
     def resetPref(self):
         # reset presets
-        self.guiStateInd
-        self.audioList
-
+        
         self.guiStateInd = len(self.guiStates)-1
         speedMultiplier = 1.0
         inputPath = "./audio/"
