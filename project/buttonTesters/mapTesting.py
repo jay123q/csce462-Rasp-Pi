@@ -27,28 +27,26 @@ def setup():
         GPIO.setup(pin,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         #break
 
-def btn_0001():
-    # Iterate current setting forward
-    print("E")
-    pass
-
-
 def btn_0010():
-    # select right option
-    print("C")
-    pass
+    # Iterate current setting forward
+    print("D")
+
+
+def btn_0001():
+    # Iterate current setting backward
+    print("B")
+
 
 def btn_0011():
     # Advance to next state
-    print("D")
-    pass
+    print("C")
 
 
 
 def btn_0100():
-    # back state
-    print("B")
-    pass
+    # Backtrack to prior state
+    print("E")
+
 
 
 
@@ -111,7 +109,8 @@ def btnReady():
     global curState
     global itr
     itr+=1
-    GPIO.wait_for_edge(ioPins[0], GPIO.RISING) # Waits on any button pressed.
+    if not ( GPIO.input(ioPins[0])):
+       return  
     print("Pressed")
     i = 99999
     bool1, bool2, bool3, bool4 = False, False, False, False

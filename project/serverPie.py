@@ -3,6 +3,7 @@ import tornado.web
 import tornado.websocket
 import tornado.httpserver
 import asyncio
+import time
 import json
 from tornado import gen
 
@@ -72,7 +73,7 @@ class mainRaspi:
         self.setup()
 
         self.btnDict = {"1000": self.btn_1000 , "0110": self.btn_0110 , "0101": self.btn_0101 , "1101": self.btn_1101 ,"1001": self.btn_1001 ,"0001": self.btn_0001 
-        ,"1100": self.btn_1100 ,"1010":self.btn_1010  ,"1110":self.btn_1110,"0010": self.btn_0010,"0100": self.btn_0100,"0011":self.btn_0011,"1011":self.btn_1101,"0111":self.btn_0111,"1111":self.btn_1111}
+        ,"1100": self.btn_1100 ,"1010":self.btn_1010  ,"1110":self.btn_1110,"0010": self.btn_0010,"0100": self.btn_0100,"0011":self.btn_0011,"1101":self.btn_1101,"0111":self.btn_0111,"1111":self.btn_1111}
         # self.btnDict = {"011": self.btn_0001, "0101": self.btn_0010, "1101": self.btn_0011, "1001": self.btn_0100, "0100": self.btn_0101, "0110": self.btn_0110, "1111": self.btn_0111,
         #                 "0111": self.btn_1000, "1011": self.btn_1001, "0011": self.btn_1010, "0100": self.btn_1011, "0010": self.btn_1100, "1110": self.btn_1101, "1010": self.btn_1110, "1000": self.btn_1111}
 
@@ -128,9 +129,11 @@ class mainRaspi:
                 bool3 = True
             if (GPIO.input(self.ioPins[4])):
                 bool4 = True
+            time.sleep(1)
             i-=1
         self.curState = ("1" if (bool1) else "0") + ("1" if (bool2) else "0") + ("1" if (bool3) else "0") + ("1" if (bool4) else "0")
         if (self.curState not in self.btnDict):
+            print("BTNNOTFOUND")
             return
         print("Button State Pressed", self.curState)
         print("Total buttons pressed", self.itr)
@@ -138,18 +141,21 @@ class mainRaspi:
         self.btnDict[self.curState]()
         pass
 
-
-
+    def btn_0000(self):
+        print("dead")
+        pass
 
     def btn_0010(self):
+        print("C")
         # Iterate current setting forward
         if (self.guiStateInd == len(self.guiStates)-1):
             return
         self.guiStates[self.guiStateInd][0] = (self.guiStates[self.guiStateInd][0] + 1) if (self.guiStates[self.guiStateInd]
                                                                                             [0] + 1 < len(self.guiStates[self.guiStateInd][1])) else (self.guiStates[self.guiStateInd][0])
         pass
-
+    
     def btn_0001(self):
+        print("E")
         # Iterate current setting backward
         if (self.guiStateInd == len(self.guiStates)-1):
             return
@@ -157,7 +163,9 @@ class mainRaspi:
             self.guiStates[self.guiStateInd][0] - 1 > -1) else (self.guiStates[self.guiStateInd][0])
         pass
 
+
     def btn_0011(self):
+        print("D")
         # Advance to next state
         self.guiStateInd
         self.guiStateInd = (self.guiStateInd + 1) if (self.guiStateInd +
@@ -167,6 +175,7 @@ class mainRaspi:
         pass
 
     def btn_0100(self):
+        print("B")
         # Backtrack to prior state
         self.guiStateInd
         self.guiStateInd = (
@@ -174,6 +183,7 @@ class mainRaspi:
         pass
 
     def btn_0101(self):
+        print("F retrun to base")
         # Settings checked, generate audio.
         self.guiStateInd
         self.audioList
@@ -196,6 +206,7 @@ class mainRaspi:
         pass
 
     def btn_0110(self):
+        print("A")
         # play all audio with presets
         self.btn_1000()
         self.btn_1001()
@@ -208,6 +219,7 @@ class mainRaspi:
         pass
 
     def btn_0111(self):
+        print("G")
         # reset presets
         self.guiStateInd
         self.audioList
@@ -229,6 +241,7 @@ class mainRaspi:
         pass
 
     def btn_1000(self):
+        print("H")
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
@@ -238,6 +251,7 @@ class mainRaspi:
         pass
 
     def btn_1001(self):
+        print("I")
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
@@ -247,6 +261,7 @@ class mainRaspi:
         pass
 
     def btn_1010(self):
+        print("J")
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
@@ -256,6 +271,7 @@ class mainRaspi:
         pass
 
     def btn_1011(self):
+        print("K")
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
@@ -265,6 +281,7 @@ class mainRaspi:
         pass
 
     def btn_1100(self):
+        print("L")
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
@@ -274,6 +291,7 @@ class mainRaspi:
         pass
 
     def btn_1101(self):
+        print("M")
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
@@ -283,6 +301,7 @@ class mainRaspi:
         pass
 
     def btn_1110(self):
+        print("N")
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
@@ -292,6 +311,7 @@ class mainRaspi:
         pass
 
     def btn_1111(self):
+        print("O")
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
