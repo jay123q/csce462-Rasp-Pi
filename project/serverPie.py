@@ -133,12 +133,10 @@ class mainRaspi:
             i-=1
         self.curState = ("1" if (bool1) else "0") + ("1" if (bool2) else "0") + ("1" if (bool3) else "0") + ("1" if (bool4) else "0")
         if (self.curState not in self.btnDict):
-            print("NOT FOUND IN DICTIONARY")
-            print(self.curState)
+            print("BTNNOTFOUND")
             return
         print("Button State Pressed", self.curState)
         print("Total buttons pressed", self.itr)
-        self.itr = self.itr+1
         WebSocketServer.send_message(str(json.dumps([self.guiStateInd,self.guiStates])))
         self.btnDict[self.curState]()
         pass
