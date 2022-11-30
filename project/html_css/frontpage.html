@@ -140,13 +140,13 @@
     var ws = new WebSocket("ws://localhost:8888/websocket");
  
     ws.onmessage = function(evt) {
+      console.log(evt.data);
         var messageDict = JSON.parse(evt.data);
-        // Create a div with the format `user: message`.
-        var messageBox = document.createElement("div");
+        //var messageBox = document.createElement("div");
         messageBox.innerHTML = messageDict.user + ": " + messageDict.message;
         document.getElementById("messages").appendChild(messageBox);
     };
-    </script>
+  </script>
 
 </body>
 <grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>

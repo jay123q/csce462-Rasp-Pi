@@ -57,7 +57,7 @@ class WebSocketServer(tornado.websocket.WebSocketHandler):
 class mainRaspi:
 
     def __init__(self):
-
+        
         # [Press Detection, 000X, 00X0, 0X00, X000]
         self.ioPins = [5, 6, 13, 19, 26]
         self.curState = "0000"
@@ -71,7 +71,8 @@ class mainRaspi:
         self.setup()
         self.btnDict = {"011X": self.btn_0001, "0101": self.btn_0010, "1101": self.btn_0011, "1001": self.btn_0100, "0100": self.btn_0101, "0110": self.btn_0110, "1111": self.btn_0111,
                         "0111": self.btn_1000, "1011": self.btn_1001, "0011": self.btn_1010, "0100": self.btn_1011, "0010": self.btn_1100, "1110": self.btn_1101, "1010": self.btn_1110, "1000": self.btn_1111}
-
+        
+        
         self.appStart()
 
     def appStart(self):
