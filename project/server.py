@@ -195,9 +195,6 @@ class mainRaspi:
 
     def confirmGenerate(self):
         # Settings checked, generate audio.
-        self.guiStateInd
-        self.audioList
-
         self.guiStateInd = len(self.guiStates)-1
         speedMultiplier = 1.0
         inputPath = "./audio/"
@@ -212,7 +209,8 @@ class mainRaspi:
         audioFunctions.writeSong(inputPath, outputPath, fName,
                                  self.guiStates[0][0], speedMultiplier, self.guiStates[3][2][self.guiStates[3][0]])
         self.audioList = [outputPath +
-                          f for f in listdir(outputPath) if isfile(join(outputPath, f))]
+                          f for f in listdir(outputPath) if (isfile(join(outputPath, f)) and fName == f[1:])]
+        print(len(self.audioList))
         pass
 
     def playAll(self):
@@ -237,7 +235,8 @@ class mainRaspi:
         audioFunctions.writeSong(inputPath, outputPath, fName,
                                  self.guiStates[0][0], speedMultiplier, self.guiStates[3][2][self.guiStateInd])
         self.audioList = [outputPath +
-                          f for f in listdir(outputPath) if isfile(join(outputPath, f))]
+                          f for f in listdir(outputPath) if (isfile(join(outputPath, f)) and fName == f[1:])]
+        print(len(self.audioList))
         pass
 
     def play1(self):

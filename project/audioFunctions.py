@@ -91,15 +91,25 @@ def parseSongWav(pathInput):
         
     if len(beats) > 1:
         bpm = np.median(60./np.diff(beats))
-    print(data)
-    print(type(np.sum(data)))
-    return box.append(data[0]), sampleRate, bpm
+
+    return box, sampleRate, bpm, data
 
 # Divides audio into 8 segments
 def writeSong(pathInput, pathOutput, fName, passState = 0, speedMultiplier = 1.0, fractional = 1.0):
-    parsedSong, sampleRate, bpm = parseSongWav(pathInput + fName)
+    parsedSong, sampleRate, bpm, data = parseSongWav(pathInput + fName)
     print(bpm, "BPM Analyzed")
     sampleRate = int(sampleRate*speedMultiplier)
+    
+    
+    _fName = pathOutput + str(8) + fName
+    scipy.write(_fName, sampleRate, data[:int(len(data)*fractional)])
+    if (passState == 1):
+        audioPass(_fName,sampleRate,500.0,False)
+    elif (passState == 2):
+        audioPass(_fName,sampleRate,3000.0,True)
+            
+            
+            
     for i in range(len(parsedSong)):
         _fName = pathOutput + str(i+1) + fName
         scipy.write(_fName, sampleRate, parsedSong[i][:int(len(parsedSong[i])*fractional)])
