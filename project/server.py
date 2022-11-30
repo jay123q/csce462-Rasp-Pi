@@ -154,6 +154,7 @@ class mainRaspi:
         print("Total buttons pressed", self.itr)
         WebSocketServer.send_message(str(json.dumps([self.guiStateInd,self.guiStates])))
         self.btnDict[self.curState]()
+        time.sleep(0.5)
         pass
 
 
