@@ -24,8 +24,8 @@
    
    .image {
      position: relative;
-     left: 100px;
-     top: -150px;
+     left: -150px;
+     top: 425px;
      right: 0px;
      bottom: 0%;
    }
@@ -33,15 +33,15 @@
    .image-2 {
      position: relative;
      left: 200px;
-     top: 800px;
+     top: 1200px;
      right: 0px;
      bottom: 0px;
    }
    
    .image-3 {
      position: relative;
-     left: 325px;
-     top: 0px;
+     left: 275px;
+     top: -170px;
      right: 0%;
      bottom: 0%;
    }
@@ -203,9 +203,9 @@
    }
    
    .button-19 {
-     position: relative;
-     left: -75px;
-     top: 95px;
-     background-color: #2a3c9d;
-     box-shadow: 1px 1px 3px 0 #000;
+    position: relative;
+    left: 1200px;
+    bottom: -98px;
+    background-color: #2a3c9d;
+    box-shadow: 1px 1px 3px 0 #000;
    }
