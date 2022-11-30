@@ -141,7 +141,7 @@ class mainRaspi:
         bool1,bool2,bool3,bool4 = True,True,True,True
         self.curState = "0101"
         print("dead space")
-        self.btnDict[self.curState]()
+        # self.btnDict[self.curState]()
         return str(self.guiStateInd) + str(self.guiStates)
     def btn_0000(self):
         print("dead")
