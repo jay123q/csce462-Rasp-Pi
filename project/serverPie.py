@@ -72,8 +72,21 @@ class mainRaspi:
         # playsound.init()
         self.setup()
 
-        self.btnDict = {"1000": self.btn_1000 , "0110": self.btn_0110 , "0101": self.btn_0101 , "1101": self.btn_1101 ,"1001": self.btn_1001 ,"0001": self.btn_0001 
-        ,"1100": self.btn_1100 ,"1010":self.btn_1010  ,"1110":self.btn_1110,"0010": self.btn_0010,"0100": self.btn_0100,"0011":self.btn_0011,"1101":self.btn_1101,"0111":self.btn_0111,"1111":self.btn_1111}
+        self.btnDict = {"1000": self.btn_1000 ,
+                        "0110": self.btn_0110 ,
+                        "0101": self.btn_0101 ,
+                        "1101": self.btn_1101 ,
+                        "1001": self.btn_1001 ,
+                        "0001": self.btn_0001 ,
+                        "1100": self.btn_1100 ,
+                        "1010": self.btn_1010  ,
+                        "1110": self.btn_1110,
+                        "0010": self.btn_0010,
+                        "0100": self.btn_0100,
+                        "0011": self.btn_0011,
+                        "1011": self.btn_1011,
+                        "0111": self.btn_0111,
+                        "1111": self.btn_1111}
         # self.btnDict = {"011": self.btn_0001, "0101": self.btn_0010, "1101": self.btn_0011, "1001": self.btn_0100, "0100": self.btn_0101, "0110": self.btn_0110, "1111": self.btn_0111,
         #                 "0111": self.btn_1000, "1011": self.btn_1001, "0011": self.btn_1010, "0100": self.btn_1011, "0010": self.btn_1100, "1110": self.btn_1101, "1010": self.btn_1110, "1000": self.btn_1111}
 
@@ -129,11 +142,11 @@ class mainRaspi:
                 bool3 = True
             if (GPIO.input(self.ioPins[4])):
                 bool4 = True
-            time.sleep(1)
             i-=1
         self.curState = ("1" if (bool1) else "0") + ("1" if (bool2) else "0") + ("1" if (bool3) else "0") + ("1" if (bool4) else "0")
         if (self.curState not in self.btnDict):
             print("BTNNOTFOUND")
+            print(self.curState)
             return
         print("Button State Pressed", self.curState)
         print("Total buttons pressed", self.itr)
