@@ -140,6 +140,7 @@ class mainRaspi:
         WebSocketServer.send_message("HELLO")
         bool1,bool2,bool3,bool4 = True,True,True,True
         self.curState = "0110"
+        print("dead space")
         self.btnDict[self.curState]()
         return str(self.guiStateInd) + str(self.guiStates)
 
