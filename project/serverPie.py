@@ -87,8 +87,6 @@ class mainRaspi:
                         "1011": self.btn_1011,
                         "0111": self.btn_0111,
                         "1111": self.btn_1111}
-        # self.btnDict = {"011": self.btn_0001, "0101": self.btn_0010, "1101": self.btn_0011, "1001": self.btn_0100, "0100": self.btn_0101, "0110": self.btn_0110, "1111": self.btn_0111,
-        #                 "0111": self.btn_1000, "1011": self.btn_1001, "0011": self.btn_1010, "0100": self.btn_1011, "0010": self.btn_1100, "1110": self.btn_1101, "1010": self.btn_1110, "1000": self.btn_1111}
 
         self.appStart()
 
@@ -150,6 +148,7 @@ class mainRaspi:
             return
         print("Button State Pressed", self.curState)
         print("Total buttons pressed", self.itr)
+        print("BUTTONS",bool1,bool2,bool3,bool4)
         WebSocketServer.send_message(str(json.dumps([self.guiStateInd,self.guiStates])))
         self.btnDict[self.curState]()
         pass
@@ -178,7 +177,7 @@ class mainRaspi:
 
 
     def btn_0011(self):
-        print("D")
+        print("D call F")
         # Advance to next state
         self.guiStateInd
         self.guiStateInd = (self.guiStateInd + 1) if (self.guiStateInd +
@@ -219,7 +218,7 @@ class mainRaspi:
         pass
 
     def btn_0110(self):
-        print("A")
+        print("A call H-O")
         # play all audio with presets
         self.btn_1000()
         self.btn_1001()
