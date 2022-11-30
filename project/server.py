@@ -210,6 +210,7 @@ class mainRaspi:
                                  self.guiStates[0][0], speedMultiplier, self.guiStates[3][2][self.guiStates[3][0]])
         self.audioList = [outputPath +
                           f for f in listdir(outputPath) if (isfile(join(outputPath, f)) and fName == f[1:])]
+        self.audioList.sort()
         print(self.audioList)
         pass
 
@@ -236,6 +237,7 @@ class mainRaspi:
                                  self.guiStates[0][0], speedMultiplier, self.guiStates[3][2][self.guiStateInd])
         self.audioList = [outputPath +
                           f for f in listdir(outputPath) if (isfile(join(outputPath, f)) and fName == f[1:])]
+        self.audioList = self.audioList.sort()
         print(self.audioList)
         pass
 
