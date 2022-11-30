@@ -68,7 +68,7 @@ class mainRaspi:
         self.guiStateInd = 0
         self.audioList = []
         self.itr = 0
-        # playsound.init()
+        playsound.init()
         self.setup()
 
         self.btnDict = {
@@ -247,8 +247,8 @@ class mainRaspi:
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
-        # playsound.music.load(self.audioList[0])
-        # playsound.music.play()
+        playsound.music.load(self.audioList[0])
+        playsound.music.play()
         print("Passed")
         pass
 
@@ -256,8 +256,8 @@ class mainRaspi:
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
-        # playsound.music.load(self.audioList[1])
-        # playsound.music.play()
+        playsound.music.load(self.audioList[1])
+        playsound.music.play()
         print("Passed")
         pass
 
@@ -265,8 +265,8 @@ class mainRaspi:
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
-        # playsound.music.load(self.audioList[2])
-        # playsound.music.play()
+        playsound.music.load(self.audioList[2])
+        playsound.music.play()
         print("Passed")
         pass
 
@@ -274,8 +274,8 @@ class mainRaspi:
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
-        # playsound.music.load(self.audioList[3])
-        # playsound.music.play()
+        playsound.music.load(self.audioList[3])
+        playsound.music.play()
         print("Passed")
         pass
 
@@ -283,8 +283,8 @@ class mainRaspi:
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
-        # playsound.music.load(self.audioList[4])
-        # playsound.music.play()
+        playsound.music.load(self.audioList[4])
+        playsound.music.play()
         print("Passed")
         pass
 
@@ -292,8 +292,8 @@ class mainRaspi:
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
-        # playsound.music.load(self.audioList[5])
-        # playsound.music.play()
+        playsound.music.load(self.audioList[5])
+        playsound.music.play()
         print("Passed")
         pass
 
@@ -301,8 +301,8 @@ class mainRaspi:
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
-        # playsound.music.load(self.audioList[6])
-        # playsound.music.play()
+        playsound.music.load(self.audioList[6])
+        playsound.music.play()
         print("Passed")
         pass
 
@@ -310,8 +310,8 @@ class mainRaspi:
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
-        # playsound.music.load(self.audioList[7])
-        # playsound.music.play()
+        playsound.music.load(self.audioList[7])
+        playsound.music.play()
         print("Passed")
         pass
 
