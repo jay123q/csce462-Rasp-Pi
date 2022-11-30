@@ -217,7 +217,7 @@ class mainRaspi:
 
     def playAll(self):
         # play all audio with presets
-        playsound.music.load(self.audioList)
+        playsound.music.load(self.audioList[8])
         playsound.music.play()
         pass
 
