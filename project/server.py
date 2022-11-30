@@ -19,8 +19,8 @@ import audioFunctions
 def sortFx(elem):
     print(elem)
     outPath = "./parsedAudio/"
-    print(elem[len(outPath):])
-    return int(elem[len(outPath):])
+    print(elem[len(outPath):2])
+    return int(elem[len(outPath):2])
 
 
 class MainHandler(tornado.web.RequestHandler):
