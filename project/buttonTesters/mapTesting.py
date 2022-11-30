@@ -109,7 +109,8 @@ def btnReady():
     global curState
     global itr
     itr+=1
-    GPIO.wait_for_edge(ioPins[0], GPIO.RISING) # Waits on any button pressed.
+    if not ( GPIO.input(ioPins[0])):
+       return  
     print("Pressed")
     i = 99999
     bool1, bool2, bool3, bool4 = False, False, False, False
