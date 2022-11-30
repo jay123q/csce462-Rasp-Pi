@@ -24,7 +24,7 @@
    
    .image {
      position: relative;
-     left: -11px;
+     left: 110px;
      top: 0px;
      right: auto;
      bottom: 0%;
@@ -41,7 +41,7 @@
      position: relative;
      left: 49px;
      top: 0px;
-     right: 0%;
+     right: 10px;
      bottom: 0%;
    }
    
@@ -286,12 +286,12 @@
    
    .image-11 {
      position: relative;
-     left: 271px;
+     left: 400px;
    }
    
    .button-23 {
      position: relative;
-     left: -352px;
+     left: 0px;
      top: -161px;
      bottom: 0px;
      background-color: #a93232;
@@ -302,7 +302,7 @@
    
    .button-24 {
      position: relative;
-     left: -425px;
+     left: -72px;
      top: -116px;
      bottom: 0px;
      background-color: #a93232;
@@ -313,7 +313,7 @@
    
    .button-25 {
      position: relative;
-     left: -499px;
+     left: -144px;
      top: -72px;
      background-color: #a93232;
      box-shadow: 1px 1px 3px 0 #000;
@@ -323,7 +323,7 @@
    
    .button-26 {
      position: relative;
-     left: -284px;
+     left: 73px;
      top: -29px;
      background-color: #a93232;
      box-shadow: 1px 1px 3px 0 #000;
@@ -333,7 +333,7 @@
    
    .button-27 {
      position: relative;
-     left: -572px;
+     left: -214px;
      top: 101px;
      background-color: #a93232;
      box-shadow: 1px 1px 3px 0 #000;
@@ -343,7 +343,7 @@
    
    .button-28 {
      position: relative;
-     left: -211px;
+     left: 147px;
      top: 57px;
      background-color: #a93232;
      box-shadow: 1px 1px 3px 0 #000;
@@ -353,7 +353,7 @@
    
    .button-29 {
      position: relative;
-     left: -140px;
+     left: 217px;
      top: 15px;
      background-color: #a93232;
      box-shadow: 1px 1px 3px 0 #000;

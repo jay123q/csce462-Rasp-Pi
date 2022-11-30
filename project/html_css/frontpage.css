@@ -22,48 +22,45 @@
      object-fit: fill;
    }
    
-   .image {
+   .image { /* music gif */
      position: relative;
-     left: 15px;
-     top: -169px;
-     right: auto;
-     bottom: 292px;
-     width: 250px;
-     height: 150px;
-     max-height: 400px;
-     max-width: 100%;
-     min-height: 50px;
-     min-width: 30px;
-     margin-top: 507px;
-     margin-bottom: 220px;
-     padding-top: 0px;
-     padding-right: 0px;
-     padding-left: 0px;
-     line-height: 10px;
-     -o-object-fit: cover;
-     object-fit: cover;
+     /*top: -169px;*/
+     margin-top: 100px;
+
    }
    
-   .image-2 {
-     position: relative;
-     top: -225px;
-     bottom: -35px;
-     margin-top: -886px;
-     margin-bottom: 712px;
+   .image-2 { /* main logo*/
+     position: fixed;
+     top: 225px; 
+     /*padding-right: 200px;*/
+     /*right: 500px;*/
+     bottom: 305px;
+     margin-top: -1550px;
+     margin-left: -190px;
+
+     margin-bottom: 200px;
    }
    
    .image-3 {
-     position: relative;
-     left: 65px;
-     top: -428px;
-     bottom: -38px;
+     position: fixed;
+     left: -650px;
+     top: 228px;
+     bottom: -4000px;
      font-weight: 400;
+     margin-top: -507px;
+     margin-bottom: -1500px; 
+     margin-left: 60px; 
+
+
+
    }
    
    .image-4 {
      position: relative;
-     top: -202px;
-     bottom: -202px;
+     /*top: 202px;*/
+     bottom: 202px;
+     margin-bottom: -1400px;
+
    }
    
    .button {
@@ -81,6 +78,6 @@
    
    @media screen and (max-width: 991px) {
      .image-2 {
-       margin-top: -929px;
+       margin-top: -429px;
      }
    }

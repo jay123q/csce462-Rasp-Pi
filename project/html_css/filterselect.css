@@ -209,52 +209,54 @@
      box-shadow: 1px 1px 3px 0 #000;
    }
    
-   .image-6 {
+   .image-6 { /*logo*/
      position: relative;
      top: 5px;
    }
    
-   .image-7 {
+   .image-7 { /* low pass */
      position: relative;
-     left: -36px;
+     left: 80px;
      right: 0px;
-     bottom: 0px;
+     bottom: -400px;
    }
    
    .image-8 {
-     position: relative;
-     left: -113px;
+     position: relative; /*no pass */
+     left: 113px;
+     bottom: -400px;
+
    }
    
-   .image-9 {
+   .image-9 { /*high pass */
      position: relative;
-     left: 0px;
-     top: 0px;
+     left: 400px;
+     top: 400px;
      bottom: 0px;
    }
    
-   .button-20 {
+   .button-20 { /*lo pass button*/
      position: relative;
-     left: -196px;
-     top: 85px;
+     left: -80px;
+     top: 500px;
      bottom: 0px;
      background-color: #2a3c9d;
      box-shadow: 1px 1px 3px 0 #000;
    }
    
-   .button-21 {
+   .button-21 { /*no pass button*/
      position: relative;
-     left: 107px;
-     top: 86px;
+     left: 337px;
+     top: 500px;
      bottom: -115px;
      background-color: #2a3c9d;
      box-shadow: 1px 1px 3px 0 #000;
    }
    
-   .button-22 {
+   .button-22 { /*no pass button*/
      position: relative;
-     left: 406px;
-     top: 82px;
+     left: 800px;
+     top: 500px;
      bottom: -116px;
      background-color: #2a3c9d;
      box-shadow: 1px 1px 3px 0 #000;

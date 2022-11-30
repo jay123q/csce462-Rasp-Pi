@@ -24,33 +24,34 @@
    
    .image {
      position: relative;
-     left: -11px;
-     top: 0px;
-     right: auto;
+     left: 100px;
+     top: -150px;
+     right: 0px;
      bottom: 0%;
    }
    
    .image-2 {
      position: relative;
-     left: 26px;
-     top: 0px;
+     left: 200px;
+     top: 800px;
+     right: 0px;
      bottom: 0px;
    }
    
    .image-3 {
      position: relative;
-     left: 49px;
+     left: 325px;
      top: 0px;
      right: 0%;
      bottom: 0%;
    }
    
    .image-4 {
-     position: absolute;
-     left: 458px;
-     top: 215px;
-     right: -274px;
-     bottom: -242px;
+     position: relative;
+     left: 0px;
+     top: 0px;
+     right: 0px;
+     bottom: 0px;
    }
    
    .button-2 {
@@ -77,7 +78,7 @@
    
    .button-4 {
      position: absolute;
-     left: 939px;
+     left: -939px;
      top: 520px;
      background-color: #2a3c9d;
      box-shadow: 1px 1px 3px 0 #000;
@@ -86,7 +87,7 @@
    
    .image-5 {
      position: relative;
-     left: -3px;
+     left: 90px;
      top: 0%;
      right: 0%;
      bottom: auto;
@@ -175,7 +176,7 @@
    
    .button-15 {
      position: relative;
-     left: -132px;
+     left: 125px;
      top: 97px;
      bottom: -103px;
      background-color: #2a3c9d;
@@ -184,7 +185,7 @@
    
    .button-16 {
      position: relative;
-     left: -179px;
+     left: -15px;
      bottom: -98px;
      background-color: #2a3c9d;
      box-shadow: 1px 1px 3px 0 #000;
@@ -203,7 +204,7 @@
    
    .button-19 {
      position: relative;
-     left: -204px;
+     left: -75px;
      top: 95px;
      background-color: #2a3c9d;
      box-shadow: 1px 1px 3px 0 #000;

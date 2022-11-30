@@ -235,9 +235,9 @@
 
 <script>
   var ws = new WebSocket("ws://localhost:8888/websocket");
-  document.getElementById("page0b").style.display = "inline";
+  document.getElementById("page0b").style.display = "none";
   document.getElementById("page1b").style.display = "none";
-  document.getElementById("page2b").style.display = "none";
+  document.getElementById("page2b").style.display = "inline";
   document.getElementById("page3b").style.display = "none";
   curPage = 0
   ws.onmessage = function (evt) {
