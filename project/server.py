@@ -16,6 +16,10 @@ import RPi.GPIO as GPIO
 # helperFiles/Functions
 import audioFunctions
 
+def sortFx(elem):
+    outPath = "./parsedAudio/"
+    return int(elem[len(outPath):1])
+
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -192,7 +196,8 @@ class mainRaspi:
         self.guiStateInd = (
             self.guiStateInd - 1) if (self.guiStateInd-1 > -1) else (self.guiStateInd)
         pass
-
+        
+    
     def confirmGenerate(self):
         # Settings checked, generate audio.
         self.guiStateInd = len(self.guiStates)-1
@@ -210,7 +215,7 @@ class mainRaspi:
                                  self.guiStates[0][0], speedMultiplier, self.guiStates[3][2][self.guiStates[3][0]])
         self.audioList = [outputPath +
                           f for f in listdir(outputPath) if (isfile(join(outputPath, f)) and fName == f[1:])]
-        self.audioList.sort()
+        self.audioList.sort(key=sortFx)
         print(self.audioList)
         pass
 
@@ -237,7 +242,7 @@ class mainRaspi:
                                  self.guiStates[0][0], speedMultiplier, self.guiStates[3][2][self.guiStateInd])
         self.audioList = [outputPath +
                           f for f in listdir(outputPath) if (isfile(join(outputPath, f)) and fName == f[1:])]
-        self.audioList = self.audioList.sort()
+        self.audioList.sort(key=sortFx)
         print(self.audioList)
         pass
 
