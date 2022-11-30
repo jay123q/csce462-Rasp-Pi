@@ -185,7 +185,7 @@ class mainRaspi:
         pass
 
     def btn_0101(self):
-        print("F")
+        print("F retrun to base")
         # Settings checked, generate audio.
         self.guiStateInd
         self.audioList
