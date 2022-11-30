@@ -57,7 +57,7 @@ class WebSocketServer(tornado.websocket.WebSocketHandler):
 class mainRaspi:
 
     def __init__(self):
-        
+
         # [Press Detection, 000X, 00X0, 0X00, X000]
         self.ioPins = [5, 6, 13, 19, 26]
         self.curState = "0000"
@@ -69,10 +69,12 @@ class mainRaspi:
         self.itr = 0
         # playsound.init()
         self.setup()
-        self.btnDict = {"011X": self.btn_0001, "0101": self.btn_0010, "1101": self.btn_0011, "1001": self.btn_0100, "0100": self.btn_0101, "0110": self.btn_0110, "1111": self.btn_0111,
-                        "0111": self.btn_1000, "1011": self.btn_1001, "0011": self.btn_1010, "0100": self.btn_1011, "0010": self.btn_1100, "1110": self.btn_1101, "1010": self.btn_1110, "1000": self.btn_1111}
-        
-        
+
+        self.btnDict = {"1000": self.btn_1000 , "0110": self.btn_0110 , "0101": self.btn_0101 , "1101": self.btn_1101 ,"1001": self.btn_1001 ,"0001": self.btn_0001 
+        ,"1100": self.btn_1100 ,"1010":self.btn_1010  ,"1110":self.btn_1110,"0010": self.btn_0010,"0100": self.btn_0100,"0011":self.btn_0011,"1011":self.btn_1101,"0111":self.btn_0111,"1111":self.btn_1111}
+        # self.btnDict = {"011": self.btn_0001, "0101": self.btn_0010, "1101": self.btn_0011, "1001": self.btn_0100, "0100": self.btn_0101, "0110": self.btn_0110, "1111": self.btn_0111,
+        #                 "0111": self.btn_1000, "1011": self.btn_1001, "0011": self.btn_1010, "0100": self.btn_1011, "0010": self.btn_1100, "1110": self.btn_1101, "1010": self.btn_1110, "1000": self.btn_1111}
+
         self.appStart()
 
     def appStart(self):
@@ -142,7 +144,7 @@ class mainRaspi:
         return str(self.guiStateInd) + str(self.guiStates)
 
 
-    def btn_0001(self):
+    def btn_0010(self):
         # Iterate current setting forward
         if (self.guiStateInd == len(self.guiStates)-1):
             return
@@ -150,7 +152,7 @@ class mainRaspi:
                                                                                             [0] + 1 < len(self.guiStates[self.guiStateInd][1])) else (self.guiStates[self.guiStateInd][0])
         pass
 
-    def btn_0010(self):
+    def btn_0001(self):
         # Iterate current setting backward
         if (self.guiStateInd == len(self.guiStates)-1):
             return
@@ -197,11 +199,36 @@ class mainRaspi:
         pass
 
     def btn_0110(self):
-        # Free Button
+        # play all audio with presets
+        self.btn_1000()
+        self.btn_1001()
+        self.btn_1010()
+        self.btn_1011()
+        self.btn_1100()
+        self.btn_1101()
+        self.btn_1110()
+        self.btn_1111()
         pass
 
     def btn_0111(self):
-        # Free Button
+        # reset presets
+        self.guiStateInd
+        self.audioList
+
+        self.guiStateInd = len(self.guiStates)-1
+        speedMultiplier = 1.0
+        inputPath = "./audio/"
+        outputPath = "./parsedAudio/"
+
+        inputFNames = [f for f in listdir(
+            inputPath) if isfile(join(inputPath, f))]
+        speedMultiplier = 1
+
+        fName = self.guiStates[0][1][self.guiStates[0][0]]
+        audioFunctions.writeSong(inputPath, outputPath, fName,
+                                 self.guiStates[0][0], speedMultiplier, self.guiStates[3][2][self.guiStateInd])
+        self.audioList = [outputPath +
+                          f for f in listdir(outputPath) if isfile(join(outputPath, f))]
         pass
 
     def btn_1000(self):
