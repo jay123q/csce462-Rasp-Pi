@@ -3,6 +3,7 @@ import tornado.web
 import tornado.websocket
 import tornado.httpserver
 import asyncio
+import json
 from tornado import gen
 
 from pygame import mixer as playsound
@@ -133,15 +134,11 @@ class mainRaspi:
             return
         print("Button State Pressed", self.curState)
         print("Total buttons pressed", self.itr)
+        WebSocketServer.send_message(str(json.dumps([self.guiStateInd,self.guiStates])))
         self.btnDict[self.curState]()
-        
-        if (bool1 == False):
-            return
-        WebSocketServer.send_message("HELLO")
-        bool1,bool2,bool3,bool4 = True,True,True,True
-        self.curState = "0110"
-        self.btnDict[self.curState]()
-        return str(self.guiStateInd) + str(self.guiStates)
+        pass
+
+
 
 
     def btn_0010(self):
