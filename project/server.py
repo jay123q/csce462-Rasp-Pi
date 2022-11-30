@@ -17,9 +17,10 @@ import RPi.GPIO as GPIO
 import audioFunctions
 
 def sortFx(elem):
+    print(elem)
     outPath = "./parsedAudio/"
-    print(elem[len(outPath):1])
-    return int(elem[len(outPath):1])
+    print(elem[len(outPath):])
+    return int(elem[len(outPath):])
 
 
 class MainHandler(tornado.web.RequestHandler):
