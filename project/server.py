@@ -68,6 +68,9 @@ class mainRaspi:
         self.guiStateInd = 0
         self.audioList = []
         self.itr = 0
+        inputPath = "./audio/"
+        inputFNames = [f for f in listdir(inputPath) if isfile(join(inputPath, f))]
+        self.guiStates[0][1] = inputFNames
         playsound.init()
         self.setup()
 
