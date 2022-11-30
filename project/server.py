@@ -37,7 +37,7 @@ class ts(tornado.web.RequestHandler):
 
 
 class WebSocketServer(tornado.websocket.WebSocketHandler):
-    # Note that `clients` is a class variable and `send_message` is a
+    # Note that `clients` is forwardState class variable and `send_message` is forwardState
     # classmethod.
     clients = set()
 
@@ -71,10 +71,25 @@ class mainRaspi:
         # playsound.init()
         self.setup()
 
-        self.btnDict = {"1000": self.btn_1000 , "0110": self.btn_0110 , "0101": self.btn_0101 , "1101": self.btn_1101 ,"1001": self.btn_1001 ,"0001": self.btn_0001 
-        ,"1100": self.btn_1100 ,"1010":self.btn_1010  ,"1110":self.btn_1110,"0010": self.btn_0010,"0100": self.btn_0100,"0011":self.btn_0011,"1011":self.btn_1101,"0111":self.btn_0111,"1111":self.btn_1111}
-        # self.btnDict = {"011": self.btn_0001, "0101": self.btn_0010, "1101": self.btn_0011, "1001": self.btn_0100, "0100": self.btn_0101, "0110": self.btn_0110, "1111": self.btn_0111,
-        #                 "0111": self.btn_1000, "1011": self.btn_1001, "0011": self.btn_1010, "0100": self.btn_1011, "0010": self.btn_1100, "1110": self.btn_1101, "1010": self.btn_1110, "1000": self.btn_1111}
+        self.btnDict = {
+            "0110": self.forwardState, 
+            "0101": self.leftOption, 
+            "1101": self.rightOption, 
+            "1001": self.backState,
+            "0001": self.confirmGenerate,
+            "1100": self.resetPref,
+            "1000": self.playAll,
+            "1010": self.play1,
+            "1110": self.play2,
+            "0010": self.play3,
+            "0100": self.play4,
+            "0011": self.play5,
+            "1011": self.play6,
+            "0111": self.play7,
+            "1111": self.play8
+            }
+        # self.btnDict = {"011": self.forwardState, "0101": self.leftOption, "1101": self.rightOption, "1001": self.backState, "0100": self.confirmGenerate, "0110": self.playAll, "1111": self.resetPref,
+        #                 "0111": self.play1, "1011": self.play2, "0011": self.play3, "0100": self.play5, "0010": self.play5, "1110": self.play6, "1010": self.play7, "1000": self.play8}
 
         self.appStart()
 
@@ -141,7 +156,7 @@ class mainRaspi:
 
 
 
-    def btn_0010(self):
+    def forwardState(self):
         # Iterate current setting forward
         if (self.guiStateInd == len(self.guiStates)-1):
             return
@@ -149,7 +164,7 @@ class mainRaspi:
                                                                                             [0] + 1 < len(self.guiStates[self.guiStateInd][1])) else (self.guiStates[self.guiStateInd][0])
         pass
 
-    def btn_0001(self):
+    def leftOption(self):
         # Iterate current setting backward
         if (self.guiStateInd == len(self.guiStates)-1):
             return
@@ -157,23 +172,23 @@ class mainRaspi:
             self.guiStates[self.guiStateInd][0] - 1 > -1) else (self.guiStates[self.guiStateInd][0])
         pass
 
-    def btn_0011(self):
+    def rightOption(self):
         # Advance to next state
         self.guiStateInd
         self.guiStateInd = (self.guiStateInd + 1) if (self.guiStateInd +
                                                       1 < len(self.guiStates)) else (self.guiStateInd)
         if (self.guiStateInd == len(self.guiStates)-1):
-            self.btn_0101()
+            self.confirmGenerate()
         pass
 
-    def btn_0100(self):
+    def backState(self):
         # Backtrack to prior state
         self.guiStateInd
         self.guiStateInd = (
             self.guiStateInd - 1) if (self.guiStateInd-1 > -1) else (self.guiStateInd)
         pass
 
-    def btn_0101(self):
+    def confirmGenerate(self):
         # Settings checked, generate audio.
         self.guiStateInd
         self.audioList
@@ -195,19 +210,19 @@ class mainRaspi:
                           f for f in listdir(outputPath) if isfile(join(outputPath, f))]
         pass
 
-    def btn_0110(self):
+    def playAll(self):
         # play all audio with presets
-        self.btn_1000()
-        self.btn_1001()
-        self.btn_1010()
-        self.btn_1011()
-        self.btn_1100()
-        self.btn_1101()
-        self.btn_1110()
-        self.btn_1111()
+        self.play1()
+        self.play2()
+        self.play3()
+        self.play4()
+        self.play5()
+        self.play6()
+        self.play7()
+        self.play8()
         pass
 
-    def btn_0111(self):
+    def resetPref(self):
         # reset presets
         self.guiStateInd
         self.audioList
@@ -228,7 +243,7 @@ class mainRaspi:
                           f for f in listdir(outputPath) if isfile(join(outputPath, f))]
         pass
 
-    def btn_1000(self):
+    def play1(self):
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
@@ -237,7 +252,7 @@ class mainRaspi:
         print("Passed")
         pass
 
-    def btn_1001(self):
+    def play2(self):
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
@@ -246,7 +261,7 @@ class mainRaspi:
         print("Passed")
         pass
 
-    def btn_1010(self):
+    def play3(self):
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
@@ -255,7 +270,7 @@ class mainRaspi:
         print("Passed")
         pass
 
-    def btn_1011(self):
+    def play4(self):
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
@@ -264,7 +279,7 @@ class mainRaspi:
         print("Passed")
         pass
 
-    def btn_1100(self):
+    def play5(self):
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
@@ -273,7 +288,7 @@ class mainRaspi:
         print("Passed")
         pass
 
-    def btn_1101(self):
+    def play6(self):
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
@@ -282,7 +297,7 @@ class mainRaspi:
         print("Passed")
         pass
 
-    def btn_1110(self):
+    def play7(self):
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
@@ -291,7 +306,7 @@ class mainRaspi:
         print("Passed")
         pass
 
-    def btn_1111(self):
+    def play8(self):
         if (self.guiStateInd != (len(self.guiStates)-1)):
             return
         print("LoadingPlayFile")
