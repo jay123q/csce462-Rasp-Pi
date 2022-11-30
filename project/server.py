@@ -17,9 +17,7 @@ import RPi.GPIO as GPIO
 import audioFunctions
 
 def sortFx(elem):
-    print(elem)
     outPath = "./parsedAudio/"
-    print(elem[len(outPath):len(outPath)+1])
     return int(elem[len(outPath):len(outPath)+1])
 
 
@@ -142,7 +140,7 @@ class mainRaspi:
     def btnReady(self):
         if not (GPIO.input(self.ioPins[0])):
             return
-        i = 99999
+        i = 199999
         bool1, bool2, bool3, bool4 = False, False, False, False
         while (i > 0):
             if (GPIO.input(self.ioPins[1])):
@@ -161,7 +159,7 @@ class mainRaspi:
         print("Total buttons pressed", self.itr)
         WebSocketServer.send_message(str(json.dumps([self.guiStateInd,self.guiStates])))
         self.btnDict[self.curState]()
-        time.sleep(0.5)
+        time.sleep(0.75)
         pass
 
 
@@ -218,7 +216,6 @@ class mainRaspi:
         self.audioList = [outputPath +
                           f for f in listdir(outputPath) if (isfile(join(outputPath, f)) and fName == f[1:])]
         self.audioList.sort(key=sortFx)
-        print(self.audioList)
         pass
 
     def playAll(self):
@@ -245,7 +242,6 @@ class mainRaspi:
         self.audioList = [outputPath +
                           f for f in listdir(outputPath) if (isfile(join(outputPath, f)) and fName == f[1:])]
         self.audioList.sort(key=sortFx)
-        print(self.audioList)
         pass
 
     def play1(self):
