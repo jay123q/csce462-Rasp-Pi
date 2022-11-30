@@ -18,6 +18,7 @@ import audioFunctions
 
 def sortFx(elem):
     outPath = "./parsedAudio/"
+    print(elem[len(outPath):1])
     return int(elem[len(outPath):1])
 
 
