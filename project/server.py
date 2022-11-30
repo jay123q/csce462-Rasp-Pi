@@ -72,10 +72,10 @@ class mainRaspi:
         self.setup()
 
         self.btnDict = {
-            "0110": self.forwardState, 
+            "1001": self.forwardState, 
             "0101": self.leftOption, 
             "1101": self.rightOption, 
-            "1001": self.backState,
+            "0110": self.backState,
             "0001": self.confirmGenerate,
             "1100": self.resetPref,
             "1000": self.playAll,
