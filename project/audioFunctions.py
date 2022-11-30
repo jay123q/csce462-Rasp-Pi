@@ -100,6 +100,9 @@ def writeSong(pathInput, pathOutput, fName, passState = 0, speedMultiplier = 1.0
     print(bpm, "BPM Analyzed")
     sampleRate = int(sampleRate*speedMultiplier)
     
+    print(type(parsedSong))
+    print(type(data))
+    print(type(parsedSong[0]))
     
     _fName = pathOutput + str(8) + fName
     scipy.write(_fName, sampleRate, data[:int(len(data)*fractional)])
