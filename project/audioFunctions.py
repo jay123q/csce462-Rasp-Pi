@@ -91,7 +91,7 @@ def parseSongWav(pathInput):
         
     if len(beats) > 1:
         bpm = np.median(60./np.diff(beats))
-    tempData = np.array_split(data,1)
+    tempData = np.array(data)
     return box, sampleRate, bpm, tempData
 
 # Divides audio into 8 segments
