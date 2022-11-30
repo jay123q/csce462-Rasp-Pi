@@ -217,14 +217,8 @@ class mainRaspi:
 
     def playAll(self):
         # play all audio with presets
-        self.play1()
-        self.play2()
-        self.play3()
-        self.play4()
-        self.play5()
-        self.play6()
-        self.play7()
-        self.play8()
+        playsound.music.load(self.audioList)
+        playsound.music.play()
         pass
 
     def resetPref(self):
